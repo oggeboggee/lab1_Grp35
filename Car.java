@@ -1,6 +1,6 @@
 import java.awt.*;
 
-public abstract class Car {
+public abstract class Car implements Movable {
 
     // INSTANSVARIABLER
     private int nrDoors; // Number of doors on the car
@@ -8,6 +8,9 @@ public abstract class Car {
     protected double currentSpeed; // The current speed of the car
     private Color color; // Color of the car
     private String modelName; // The car model name
+    private double xCoord = 0; // x-coordinate of the car
+    private double yCoord = 0; // x-coordinate of the car
+    private int dir = 0; // direction of the car (0 = -x, 1 = +y, 2 = +x, 3 = -y)
 
 
     //KONSTRUKTOR
@@ -56,6 +59,20 @@ public abstract class Car {
         currentSpeed = Math.max(currentSpeed - speedFactor() * amount,0);
     }
 
+    public void Move(){
+        if (dir == 0) x -= currentSpeed;
+        else if (dir == 1) y += currentSpeed;
+        else if (dir == 2) y -= currentSpeed;
+        else if (dir == 3) x += currentSpeed;
+    }
+    public void turnLeft(){
+        dir -= 1;
+        if (dir < 0) dir = 3;
+    }
+    public void turnRight(){
+        dir += 1;
+        if (dir > 3) dir = 0;
+    }
 
     //Gas/break
     // TODO fix this method according to lab pm
