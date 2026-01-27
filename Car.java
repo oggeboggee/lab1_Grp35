@@ -8,9 +8,9 @@ public abstract class Car implements Movable {
     protected double currentSpeed; // The current speed of the car
     private Color color; // Color of the car
     private String modelName; // The car model name
-    private double xCoord = 0; // x-coordinate of the car
-    private double yCoord = 0; // x-coordinate of the car
-    private int dir = 0; // direction of the car (0 = -x, 1 = +y, 2 = +x, 3 = -y)
+    private double xCoord; // x-coordinate of the car
+    private double yCoord; // x-coordinate of the car
+    private int dir; // direction of the car (0 = -x, 1 = +y, 2 = +x, 3 = -y)
 
 
     //KONSTRUKTOR
@@ -21,7 +21,7 @@ public abstract class Car implements Movable {
         modelName = modelname;
         xCoord = 0;
         yCoord = 0;
-        int dir = 0;
+        dir = 0;
         stopEngine();
     }
 
