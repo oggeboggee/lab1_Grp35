@@ -15,6 +15,13 @@ public abstract class Car implements Movable {
 
     //KONSTRUKTOR
     public Car(int doors, double enginepower, Color c, String modelname) {
+        nrDoors = doors;
+        enginePower = enginepower;
+        color = c;
+        modelName = modelname;
+        xCoord = 0;
+        yCoord = 0;
+        int dir = 0;
         stopEngine();
     }
 
