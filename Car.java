@@ -3,15 +3,16 @@ import java.awt.*;
 public abstract class Car {
 
     // INSTANSVARIABLER
-    public int nrDoors; // Number of doors on the car
-    public double enginePower; // Engine power of the car
-    public double currentSpeed; // The current speed of the car
-    public Color color; // Color of the car
-    public String modelName; // The car model name
+    private int nrDoors; // Number of doors on the car
+    private double enginePower; // Engine power of the car
+    protected double currentSpeed; // The current speed of the car
+    private Color color; // Color of the car
+    private String modelName; // The car model name
 
 
     //KONSTRUKTOR
-    public Car() {
+    public Car(int doors, double enginepower, Color c, String modelname) {
+        stopEngine();
     }
 
     // METODER
@@ -47,9 +48,13 @@ public abstract class Car {
     //Abstrakta metoder
     public abstract double speedFactor();
 
-    public abstract void incrementSpeed(double amount);
+    public void incrementSpeed(double amount){
+        currentSpeed = Math.min(currentSpeed + speedFactor() * amount,enginePower);
+    }
 
-    public abstract void decrementSpeed(double amount);
+    public void decrementSpeed(double amount){
+        currentSpeed = Math.max(currentSpeed - speedFactor() * amount,0);
+    }
 
 
     //Gas/break
