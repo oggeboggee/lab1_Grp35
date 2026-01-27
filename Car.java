@@ -67,10 +67,10 @@ public abstract class Car implements Movable {
     }
 
     public void Move(){
-        if (dir == 0) x -= currentSpeed;
-        else if (dir == 1) y += currentSpeed;
-        else if (dir == 2) y -= currentSpeed;
-        else if (dir == 3) x += currentSpeed;
+        if (dir == 0) xCoord -= currentSpeed;
+        else if (dir == 1) yCoord += currentSpeed;
+        else if (dir == 2) yCoord -= currentSpeed;
+        else if (dir == 3) xCoord += currentSpeed;
     }
     public void turnLeft(){
         dir -= 1;
