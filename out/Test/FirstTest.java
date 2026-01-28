@@ -32,4 +32,9 @@ public class FirstTest {
         Assert.assertTrue(saab.getCurrentSpeed()>speedBefore);
         saab.startEngine();
     }
+    public void DirectionPosition(){
+        Assert.assertTrue(saab.getDirection() == 0);
+        Assert.assertTrue(volvo.getDirection() == 0);
+        //ska fixa resten
+    }
 }

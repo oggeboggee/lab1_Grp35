@@ -81,6 +81,8 @@ public abstract class Car implements Movable {
         if (dir > 3) dir = 0;
         //TODO - modolu
     }
+    public int getDirection(){return dir;}
+    public Double[] getPosition(){return new Double[]{xCoord, yCoord};}
 
     //Gas/break
     // TODO fix this method according to lab pm
