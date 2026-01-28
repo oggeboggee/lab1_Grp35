@@ -3,6 +3,7 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
+// Hej
 public class FirstTest {
     Saab95 saab = new Saab95();
     Volvo240 volvo = new Volvo240();
