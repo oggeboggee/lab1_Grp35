@@ -79,7 +79,7 @@ public abstract class Car implements Movable {
     public void turnRight(){
         dir += 1;
         if (dir > 3) dir = 0;
-        //TODO - modolu
+        //TODO - modolugh
     }
 
     //Gas/break
