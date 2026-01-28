@@ -66,11 +66,11 @@ public abstract class Car implements Movable {
         currentSpeed = Math.max(currentSpeed - speedFactor() * amount,0);
     }
 
-    public void Move(){
-        if (dir == 0) xCoord -= currentSpeed;
+    public void move(){
+        if      (dir == 0) xCoord -= currentSpeed;
         else if (dir == 1) yCoord += currentSpeed;
-        else if (dir == 2) yCoord -= currentSpeed;
-        else if (dir == 3) xCoord += currentSpeed;
+        else if (dir == 2) xCoord += currentSpeed;
+        else if (dir == 3) yCoord -= currentSpeed;
     }
     public void turnLeft(){
         dir -= 1;
@@ -79,6 +79,7 @@ public abstract class Car implements Movable {
     public void turnRight(){
         dir += 1;
         if (dir > 3) dir = 0;
+        //TODO - modolu
     }
 
     //Gas/break
