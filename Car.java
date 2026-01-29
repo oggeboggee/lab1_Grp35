@@ -75,14 +75,11 @@ public abstract class Car implements Movable {
     }
 
     public void turnLeft() {
-        dir -= 1;
-        if (dir < 0) dir = 3;
+        dir = (dir + 7) % 4;
     }
 
     public void turnRight() {
-        dir += 1;
-        if (dir > 3) dir = 0;
-        //TODO - modolu
+        dir = (dir + 1) % 4;
     }
 
     public int getDirection() {
