@@ -1,8 +1,6 @@
 import java.awt.*;
 
-public class Volvo240 extends Car{
-
-    // INSTANSVARIABLER
+public final class Volvo240 extends Car{
     private double trimFactor;
 
     // KONSTRUKTOR
