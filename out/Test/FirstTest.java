@@ -59,7 +59,7 @@ public class FirstTest {
         Assert.assertTrue(volvo.getDirection() == 0);
     }
     @Test
-    public void TestTurnRight(){
+    public void TestTurnRight(){ //kommentar
         saab.turnRight();
         Assert.assertTrue(saab.getDirection() == 1);
         saab.turnRight();
