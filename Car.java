@@ -59,11 +59,11 @@ public abstract class Car implements Movable {
     //Abstrakta metoder
     public abstract double speedFactor();
 
-    public void incrementSpeed(double amount) {
+    private void incrementSpeed(double amount) {
         currentSpeed = Math.min(currentSpeed + speedFactor() * amount, enginePower);
     }
 
-    public void decrementSpeed(double amount) {
+    private void decrementSpeed(double amount) {
         currentSpeed = Math.max(currentSpeed - speedFactor() * amount, 0);
     }
 
