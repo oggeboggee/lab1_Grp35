@@ -27,71 +27,96 @@ public abstract class Car implements Movable {
 
     // METODER
     // Get/Set-Metoder
-    public int getNrDoors(){
+    public int getNrDoors() {
         return nrDoors;
     }
-    public double getEnginePower(){
+
+    public double getEnginePower() {
         return enginePower;
     }
 
-    public double getCurrentSpeed(){
+    public double getCurrentSpeed() {
         return currentSpeed;
     }
 
-    public Color getColor(){
+    public Color getColor() {
         return color;
     }
 
-    public void setColor(Color clr){
+    public void setColor(Color clr) {
         color = clr;
     }
 
     // Start/Stop - Engine
-    public void startEngine(){
+    public void startEngine() {
         currentSpeed = 0.1;
     }
 
-    public void stopEngine(){
+    public void stopEngine() {
         currentSpeed = 0;
     }
 
     //Abstrakta metoder
     public abstract double speedFactor();
 
-    public void incrementSpeed(double amount){
-        currentSpeed = Math.min(currentSpeed + speedFactor() * amount,enginePower);
+    public void incrementSpeed(double amount) {
+        currentSpeed = Math.min(currentSpeed + speedFactor() * amount, enginePower);
     }
 
-    public void decrementSpeed(double amount){
-        currentSpeed = Math.max(currentSpeed - speedFactor() * amount,0);
+    public void decrementSpeed(double amount) {
+        currentSpeed = Math.max(currentSpeed - speedFactor() * amount, 0);
     }
 
-    public void move(){
-        if      (dir == 0) xCoord -= currentSpeed;
+    public void move() {
+        if (dir == 0) xCoord -= currentSpeed;
         else if (dir == 1) yCoord += currentSpeed;
         else if (dir == 2) xCoord += currentSpeed;
         else if (dir == 3) yCoord -= currentSpeed;
     }
-    public void turnLeft(){
+
+    public void turnLeft() {
         dir -= 1;
         if (dir < 0) dir = 3;
     }
-    public void turnRight(){
+
+    public void turnRight() {
         dir += 1;
         if (dir > 3) dir = 0;
         //TODO - modolu
     }
-    public int getDirection(){return dir;}
-    public Double[] getPosition(){return new Double[]{xCoord, yCoord};}
 
-    //Gas/break
-    // TODO fix this method according to lab pm
-    public void gas(double amount){
-        incrementSpeed(amount);
+    public int getDirection() {
+        return dir;
     }
 
-    // TODO fix this method according to lab pm
-    public void brake(double amount){
-        decrementSpeed(amount);
+    public Double[] getPosition() {
+        return new Double[]{xCoord, yCoord};
+    }
+
+
+    public void gas(double amount) {
+        double beforeGas = getCurrentSpeed();
+        if (amount < 0 || amount > 1) {
+            throw new IllegalArgumentException("illegal gas-value");
+        } else {
+            incrementSpeed(amount);
+            if (getCurrentSpeed() - beforeGas <0 ) {
+                currentSpeed = beforeGas;
+            }
+        }
+
+    }
+
+    public void brake(double amount) {
+        double beforeBreake = getCurrentSpeed();
+        if ((amount < 0 || amount > 1)) {
+            throw new IllegalArgumentException("illegal gas-value");
+        }
+        else {decrementSpeed(amount);
+              if (getCurrentSpeed() - beforeBrake > 0) {
+                  currentSpeed = beforeBreake;
+
+              }
+        }
     }
 }

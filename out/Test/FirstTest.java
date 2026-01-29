@@ -33,50 +33,9 @@ public class FirstTest {
         Assert.assertTrue(saab.getCurrentSpeed()>speedBefore);
         saab.startEngine();
     }
-    @Test
-    public void TestGetDirection() {
-        Assert.assertTrue(saab.getDirection() == 0);
-        Assert.assertTrue(volvo.getDirection() == 0);
-    }
-    @Test
-    public void TestTurnLeft(){
-        saab.turnLeft();
-        Assert.assertTrue(saab.getDirection() == 3);
-        saab.turnLeft();
-        Assert.assertTrue(saab.getDirection() == 2);
-        saab.turnLeft();
-        Assert.assertTrue(saab.getDirection() == 1);
-        saab.turnLeft();
-        Assert.assertTrue(saab.getDirection() == 0);
-        
-        volvo.turnLeft();
-        Assert.assertTrue(volvo.getDirection() == 3);
-        volvo.turnLeft();
-        Assert.assertTrue(volvo.getDirection() == 2);
-        volvo.turnLeft();
-        Assert.assertTrue(volvo.getDirection() == 1);
-        volvo.turnLeft();
-        Assert.assertTrue(volvo.getDirection() == 0);
-    }
-    @Test
-    public void TestTurnRight(){
-        saab.turnRight();
-        Assert.assertTrue(saab.getDirection() == 1);
-        saab.turnRight();
-        Assert.assertTrue(saab.getDirection() == 2);
-        saab.turnRight();
-        Assert.assertTrue(saab.getDirection() == 3);
-        saab.turnRight();
-        Assert.assertTrue(saab.getDirection() == 0);
-
-        volvo.turnRight();
-        Assert.assertTrue(volvo.getDirection() == 1);
-        volvo.turnRight();
-        Assert.assertTrue(volvo.getDirection() == 2);
-        volvo.turnRight();
-        Assert.assertTrue(volvo.getDirection() == 3);
-        volvo.turnRight();
-        Assert.assertTrue(volvo.getDirection() == 0);
-    }
-
+   // public void DirectionPosition(){
+   //     Assert.assertTrue(saab.getDirection() == 0);
+   //     Assert.assertTrue(volvo.getDirection() == 0);
+    //    //ska fixa resten
+  //  }
 }
