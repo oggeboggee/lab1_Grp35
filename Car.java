@@ -113,7 +113,7 @@ public abstract class Car implements Movable {
             throw new IllegalArgumentException("illegal gas-value");
         }
         else {decrementSpeed(amount);
-              if (getCurrentSpeed() - beforeBrake > 0) {
+              if (getCurrentSpeed() - beforeBreake > 0) {
                   currentSpeed = beforeBreake;
 
               }
