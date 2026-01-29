@@ -67,17 +67,19 @@ public abstract class Car implements Movable {
         currentSpeed = Math.max(currentSpeed - speedFactor() * amount, 0);
     }
 
+    @Override
     public void move() {
         if      (dir == 0) xCoord -= currentSpeed;
         else if (dir == 1) yCoord += currentSpeed;
         else if (dir == 2) xCoord += currentSpeed;
         else if (dir == 3) yCoord -= currentSpeed;
     }
-
+    @Override
     public void turnLeft() {
-        dir = (dir + 7) % 4;
+        dir = (dir + 3) % 4;
     }
 
+    @Override
     public void turnRight() {
         dir = (dir + 1) % 4;
     }
