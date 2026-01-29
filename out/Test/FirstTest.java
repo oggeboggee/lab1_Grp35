@@ -1,6 +1,4 @@
 import junit.framework.Assert;
-import org.junit.After;
-import org.junit.Before;
 import org.junit.Test;
 
 // Hej
@@ -31,8 +29,18 @@ public class FirstTest {
         double speedBefore = saab.getCurrentSpeed();
         saab.gas(1);
         Assert.assertTrue(saab.getCurrentSpeed()>speedBefore);
-        saab.startEngine();
+        saab.stopEngine();
     }
+    @Test
+    public void TestBrake() {
+        saab.startEngine();
+        saab.gas(1);
+        double speedBefore = saab.getCurrentSpeed();
+        saab.brake(0.5);
+        Assert.assertTrue(saab.getCurrentSpeed()<speedBefore);
+        saab.stopEngine();
+    }
+
     @Test
     public void TestGetDirection() {
         Assert.assertTrue(saab.getDirection() == 0);
@@ -59,7 +67,7 @@ public class FirstTest {
         Assert.assertTrue(volvo.getDirection() == 0);
     }
     @Test
-    public void TestTurnRight(){ //kommentar
+    public void TestTurnRight(){
         saab.turnRight();
         Assert.assertTrue(saab.getDirection() == 1);
         saab.turnRight();
