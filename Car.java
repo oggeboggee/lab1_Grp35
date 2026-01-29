@@ -5,7 +5,7 @@ public abstract class Car implements Movable {
     // INSTANSVARIABLER g
     private int nrDoors; // Number of doors on the car
     private double enginePower; // Engine power of the car
-    protected double currentSpeed; // The current speed of the car
+    private double currentSpeed; // The current speed of the car
     private Color color; // Color of the car
     private String modelName; // The car model name
     private double xCoord; // x-coordinate of the car
@@ -57,18 +57,18 @@ public abstract class Car implements Movable {
     }
 
     //Abstrakta metoder
-    public abstract double speedFactor();
+    protected abstract double speedFactor();
 
-    public void incrementSpeed(double amount) {
+    private void incrementSpeed(double amount) {
         currentSpeed = Math.min(currentSpeed + speedFactor() * amount, enginePower);
     }
 
-    public void decrementSpeed(double amount) {
+    private void decrementSpeed(double amount) {
         currentSpeed = Math.max(currentSpeed - speedFactor() * amount, 0);
     }
 
     public void move() {
-        if (dir == 0) xCoord -= currentSpeed;
+        if      (dir == 0) xCoord -= currentSpeed;
         else if (dir == 1) yCoord += currentSpeed;
         else if (dir == 2) xCoord += currentSpeed;
         else if (dir == 3) yCoord -= currentSpeed;
