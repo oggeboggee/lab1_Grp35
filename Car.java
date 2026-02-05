@@ -114,8 +114,7 @@ public abstract class Car implements Movable {
         else {decrementSpeed(amount);
               if (getCurrentSpeed() - beforeBreake > 0) {
                   currentSpeed = beforeBreake;
-
               }
         }
     }
-}
+} // Car
