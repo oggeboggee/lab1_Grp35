@@ -86,5 +86,41 @@ public class FirstTest {
         volvo.turnRight();
         Assert.assertTrue(volvo.getDirection() == 0);
     }
+    @Test
+    public void TestMove(){
+        saab.gas(1);
+        saab.move();
+        Assert.assertTrue(saab.getPosition()[0] == -(saab.getCurrentSpeed()));
+        Assert.assertTrue(saab.getPosition()[1] == 0);
+        saab.turnLeft();
+        saab.move();
+        Assert.assertTrue(saab.getPosition()[1] == -(saab.getCurrentSpeed()));
+        Assert.assertTrue(saab.getPosition()[0] == -(saab.getCurrentSpeed()));
+        saab.turnLeft();
+        saab.move();
+        Assert.assertTrue(saab.getPosition()[0] == 0);
+        Assert.assertTrue(saab.getPosition()[1] == -(saab.getCurrentSpeed()));
+        saab.turnLeft();
+        saab.move();
+        Assert.assertTrue(saab.getPosition()[1] == 0);
+        Assert.assertTrue(saab.getPosition()[0] == 0);
+
+        volvo.gas(1);
+        volvo.move();
+        Assert.assertTrue(volvo.getPosition()[0] == -(volvo.getCurrentSpeed()));
+        Assert.assertTrue(volvo.getPosition()[1] == 0);
+        volvo.turnLeft();
+        volvo.move();
+        Assert.assertTrue(volvo.getPosition()[1] == -(volvo.getCurrentSpeed()));
+        Assert.assertTrue(volvo.getPosition()[0] == -(volvo.getCurrentSpeed()));
+        volvo.turnLeft();
+        volvo.move();
+        Assert.assertTrue(volvo.getPosition()[0] == 0);
+        Assert.assertTrue(volvo.getPosition()[1] == -(volvo.getCurrentSpeed()));
+        volvo.turnLeft();
+        volvo.move();
+        Assert.assertTrue(volvo.getPosition()[1] == 0);
+        Assert.assertTrue(volvo.getPosition()[0] == 0);
+    }
 
 }
