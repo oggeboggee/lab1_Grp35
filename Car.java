@@ -70,7 +70,9 @@ public abstract class Car implements Movable {
     }
 
     //Abstrakta metoder
-    protected abstract double speedFactor();
+    protected double speedFactor() {
+        return getEnginePower() * 0.01;
+    };
 
     private void incrementSpeed(double amount) {
         currentSpeed = Math.min(currentSpeed + speedFactor() * amount, enginePower);
@@ -101,8 +103,18 @@ public abstract class Car implements Movable {
         return dir;
     }
 
+    public void setDirection(int d) {
+        dir = d;
+
+    }
+
     public Double[] getPosition() {
         return new Double[]{xCoord, yCoord};
+    }
+
+    public void setPosition(Double[] pos) {
+        xCoord = pos[0];
+        yCoord = pos[1];
     }
 
 
