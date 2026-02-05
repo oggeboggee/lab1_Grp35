@@ -5,8 +5,9 @@ public final class Volvo240 extends Car{
 
     // KONSTRUKTOR
     public Volvo240(){
-        super(4, 100,  Color.BLACK, "Volvo240");
+        super(4, 100,  Color.BLACK, "Volvo240", 480, 171);
         trimFactor = 1.25;
+
     }
 
     // METODER

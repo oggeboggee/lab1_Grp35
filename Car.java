@@ -11,10 +11,12 @@ public abstract class Car implements Movable {
     private double xCoord; // x-coordinate of the car
     private double yCoord; // x-coordinate of the car
     private int dir; // direction of the car (0 = -x, 1 = +y, 2 = +x, 3 = -y)
+    private double length; // length of car in cm
+    private double width; // width of car in cm
 
 
     //KONSTRUKTOR
-    public Car(int doors, double enginepower, Color c, String modelname) {
+    public Car(int doors, double enginepower, Color c, String modelname, double len, double wid) {
         nrDoors = doors;
         enginePower = enginepower;
         color = c;
@@ -22,6 +24,9 @@ public abstract class Car implements Movable {
         xCoord = 0;
         yCoord = 0;
         dir = 0;
+        length = len;
+        width = wid;
+
         stopEngine();
     }
 
@@ -37,6 +42,14 @@ public abstract class Car implements Movable {
 
     public double getCurrentSpeed() {
         return currentSpeed;
+    }
+
+    public double getLength() {
+        return length;
+    }
+
+    public double getWidth() {
+        return width;
     }
 
     public Color getColor() {
