@@ -15,18 +15,19 @@ public class CarTransport extends Car {
     public void move() {
         if (trailerIsUp) {
             super.move();
-            for (Car c : load) {
-                c.setDirection(getDirection());
-                c.setPosition(getPosition());
+            for (int i = 0; i < nrLoadedCars; i++) {
+                load[i].setDirection(getDirection());
+                load[i].setPosition(getPosition());
             }
         }
-    }
+    } // move
 
     public void load(Car c) {
 
         if ((!trailerIsUp) && ((Math.abs(getPosition()[0] - c.getPosition()[0]) < 5) && (Math.abs(getPosition()[1] - c.getPosition()[1]) < 5))) {
 
             if ((nrLoadedCars < load.length) && (c.getClass() != CarTransport.class)) {
+
                 if (c.getWidth() < (getWidth() - 20)) {
                     load[nrLoadedCars] = c;
                     nrLoadedCars++;
@@ -44,7 +45,7 @@ public class CarTransport extends Car {
                 nrLoadedCars--;
             }
         }
-    }
+    } //unload
 
 
     public void unloadmove(Car c) {
@@ -70,6 +71,6 @@ public class CarTransport extends Car {
         Double[] pos = {newX, newY};
         c.setPosition(pos);
 
+    } //unloadmove
 
-    }
-}
+} //class carTransport
