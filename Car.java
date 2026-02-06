@@ -13,6 +13,7 @@ public abstract class Car implements Movable {
     private int dir; // direction of the car (0 = -x, 1 = +y, 2 = +x, 3 = -y)
     private double length; // length of car in cm
     private double width; // width of car in cm
+    private boolean isAttached;
 
 
     //KONSTRUKTOR
@@ -26,6 +27,7 @@ public abstract class Car implements Movable {
         dir = 0;
         length = len;
         width = wid;
+        isAttached = false;
 
         stopEngine();
     }
@@ -117,6 +119,12 @@ public abstract class Car implements Movable {
         yCoord = pos[1];
     }
 
+    public void follow(Car other) {
+        if(isAttached) {
+            this.xCoord = other.xCoord;
+            this.yCoord = other.yCoord;
+        }
+    }
 
     public void gas(double amount) {
         double beforeGas = getCurrentSpeed();
@@ -137,9 +145,9 @@ public abstract class Car implements Movable {
             throw new IllegalArgumentException("illegal gas-value");
         }
         else {decrementSpeed(amount);
-              if (getCurrentSpeed() - beforeBreake > 0) {
-                  currentSpeed = beforeBreake;
-              }
+            if (getCurrentSpeed() - beforeBreake > 0) {
+                currentSpeed = beforeBreake;
+            }
         }
     }
 } // class Car
