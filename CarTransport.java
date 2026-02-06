@@ -29,18 +29,17 @@ public class CarTransport extends Car implements Loadable<Car> {
         }
     } // move
 
-    public boolean carInPosition(Car c) {
-        return ((Math.abs(getPosition()[0] - c.getPosition()[0]) < 5)
-                    && (Math.abs(getPosition()[1] - c.getPosition()[1]) < 5));
+    public double carDistance(Car c) {
+        double diffX =  (Math.abs(getPosition()[0] - c.getPosition()[0]));
+        double diffY =  (Math.abs(getPosition()[1] - c.getPosition()[1]));
+        return Math.sqrt(Math.pow(diffX, 2) + Math.pow(diffY,2));
+
     }
 
     @Override
     public void load(Car c) {
-
-        if ((!trailerIsUp) && ((Math.abs(getPosition()[0] - c.getPosition()[0]) < 5) && (Math.abs(getPosition()[1] - c.getPosition()[1]) < 5))) {
-
+        if (carDistance(c) < 7) {
             if ((nrLoadedCars < load.length) && (c.getClass() != CarTransport.class)) {
-
                 if (c.getWidth() < (getWidth() - 20)) {
                     load[nrLoadedCars] = c;
                     nrLoadedCars++;
