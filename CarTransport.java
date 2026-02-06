@@ -11,6 +11,13 @@ public class CarTransport extends Car implements Loadable<Car> {
         trailerIsUp = true;
     }
 
+    public void trailerUp() {
+        if(!trailerIsUp) trailerIsUp = true;
+    }
+    public void trailerDown() {
+        if (trailerIsUp) trailerIsUp = false;
+    }
+
     @Override
     public void move() {
         if (trailerIsUp) {
@@ -21,6 +28,11 @@ public class CarTransport extends Car implements Loadable<Car> {
             }
         }
     } // move
+
+    public boolean carInPosition(Car c) {
+        return ((Math.abs(getPosition()[0] - c.getPosition()[0]) < 5)
+                    && (Math.abs(getPosition()[1] - c.getPosition()[1]) < 5));
+    }
 
     @Override
     public void load(Car c) {
