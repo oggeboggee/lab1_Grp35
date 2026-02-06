@@ -105,25 +105,23 @@ public abstract class Car implements Movable {
         return dir;
     }
 
-    public void setDirection(int d) {
-        dir = d;
-
-    }
-
     public Double[] getPosition() {
         return new Double[]{xCoord, yCoord};
-    }
-
-    public void setPosition(Double[] pos) {
-        xCoord = pos[0];
-        yCoord = pos[1];
     }
 
     public void follow(Car other) {
         if(isAttached) {
             this.xCoord = other.xCoord;
             this.yCoord = other.yCoord;
+            this.dir = other.dir;
         }
+    }
+
+    public void attachCar() {
+        isAttached = true;
+    }
+    public void deAttachCar() {
+        isAttached = false;
     }
 
     public void gas(double amount) {

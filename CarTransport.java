@@ -23,8 +23,7 @@ public class CarTransport extends Car implements Loadable<Car> {
         if (trailerIsUp) {
             super.move();
             for (int i = 0; i < nrLoadedCars; i++) {
-                load[i].setDirection(getDirection());
-                load[i].setPosition(getPosition());
+                load[i].follow(this);
             }
         }
     } // move
@@ -43,6 +42,7 @@ public class CarTransport extends Car implements Loadable<Car> {
                 if (c.getWidth() < (getWidth() - 20)) {
                     load[nrLoadedCars] = c;
                     nrLoadedCars++;
+                    c.attachCar();
                 }
             }
         }
@@ -63,6 +63,7 @@ public class CarTransport extends Car implements Loadable<Car> {
                 unloadmove(c);
                 load[nrLoadedCars - 1] = null;
                 nrLoadedCars--;
+                c.deAttachCar();
             }
         return c;
     } //unload method
