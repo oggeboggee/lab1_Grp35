@@ -68,7 +68,7 @@ public class CarTransport extends Car implements Loadable<Car> {
         return c;
     } //unload method
 
-
+    /*
     public void unloadmove(Car c) {
         double newX = 0;
         double newY = 0;
@@ -91,6 +91,8 @@ public class CarTransport extends Car implements Loadable<Car> {
         }
         Double[] pos = {newX, newY};
         c.setPosition(pos);
+
+     */
 
     } //unloadmove
 
