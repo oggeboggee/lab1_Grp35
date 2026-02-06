@@ -91,6 +91,15 @@ public abstract class Car implements Movable {
         else if (dir == 2) xCoord += currentSpeed;
         else if (dir == 3) yCoord -= currentSpeed;
     }
+
+    public void reverse() {
+        if      (dir == 0) xCoord += 20;
+        else if (dir == 1) yCoord -= 20 ;
+        else if (dir == 2) xCoord -= 20;
+        else if (dir == 3) yCoord += 20;
+    }
+
+
     @Override
     public void turnLeft() {
         dir = (dir + 3) % 4;
