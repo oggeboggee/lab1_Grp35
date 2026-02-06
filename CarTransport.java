@@ -1,6 +1,6 @@
 import java.awt.*;
 
-public class CarTransport extends Car {
+public class CarTransport extends Car implements Loadable<Car> {
     Car[] load;
     boolean trailerIsUp;
     int nrLoadedCars;
@@ -22,6 +22,7 @@ public class CarTransport extends Car {
         }
     } // move
 
+    @Override
     public void load(Car c) {
 
         if ((!trailerIsUp) && ((Math.abs(getPosition()[0] - c.getPosition()[0]) < 5) && (Math.abs(getPosition()[1] - c.getPosition()[1]) < 5))) {
@@ -37,15 +38,23 @@ public class CarTransport extends Car {
     } // load
 
 
-    public void unload() {
-        if (!trailerIsUp) {
-            if (nrLoadedCars > 0) {
-                unloadmove(load[nrLoadedCars - 1]);
+    /**
+     * unload the car with the highest index in this load, unload it just behind the CarTransport
+     *
+     * @return the unloaded car if trailer not is empty and trailer is down before the method is called
+     */
+
+    @Override
+    public Car unload() {
+        Car c = null;
+        if ((!trailerIsUp) && (nrLoadedCars > 0)) {
+                c = load[nrLoadedCars - 1];
+                unloadmove(c);
                 load[nrLoadedCars - 1] = null;
                 nrLoadedCars--;
             }
-        }
-    } //unload
+        return c;
+    } //unload method
 
 
     public void unloadmove(Car c) {
