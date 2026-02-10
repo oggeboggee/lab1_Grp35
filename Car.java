@@ -1,8 +1,11 @@
 import java.awt.*;
+import java.util.ArrayList;
 
 public abstract class Car implements Movable {
 
-    // INSTANSVARIABLER g
+    private static ArrayList<Car> allCars = new ArrayList<>(100);
+
+    // INSTANSVARIABLER
     private int nrDoors; // Number of doors on the car
     private double enginePower; // Engine power of the car
     private double currentSpeed; // The current speed of the car
@@ -14,10 +17,16 @@ public abstract class Car implements Movable {
     private double length; // length of car in cm
     private double width; // width of car in cm
     private boolean isAttached;
+    private final int regNr;
 
+    public static Car getCar(int i) {
+        return allCars.get(i);
+    }
 
     //KONSTRUKTOR
     public Car(int doors, double enginepower, Color c, String modelname, double len, double wid) {
+        allCars.add(this);
+
         nrDoors = doors;
         enginePower = enginepower;
         color = c;
@@ -28,12 +37,18 @@ public abstract class Car implements Movable {
         length = len;
         width = wid;
         isAttached = false;
+        regNr = allCars.indexOf(this);
 
         stopEngine();
     }
 
+
     // METODER
     // Get/Set-Metoder
+    public int getRegNr() {
+        return regNr;
+    }
+
     public int getNrDoors() {
         return nrDoors;
     }
@@ -74,7 +89,7 @@ public abstract class Car implements Movable {
     //Abstrakta metoder
     protected double speedFactor() {
         return getEnginePower() * 0.01;
-    };
+    }
 
     private void incrementSpeed(double amount) {
         currentSpeed = Math.min(currentSpeed + speedFactor() * amount, enginePower);
