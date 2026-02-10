@@ -19,6 +19,7 @@ public abstract class Car implements Movable {
     private double width; // width of car in cm
     private boolean isAttached;
     private final int regNr;
+    private boolean EngineOn;
 
     public static Car getCar(int i) {
         return allCars.get(i);
@@ -39,7 +40,6 @@ public abstract class Car implements Movable {
         width = wid;
         isAttached = false;
         regNr = allCars.indexOf(this);
-
         stopEngine();
     }
 
@@ -95,11 +95,13 @@ public abstract class Car implements Movable {
 
     // ---------------------------------- SPEED_METODER ----------------------------------
     public void startEngine() {
+        EngineOn = true;
         currentSpeed = 0.1;
     }
 
     public void stopEngine() {
         currentSpeed = 0;
+        EngineOn = false;
     }
 
     protected double speedFactor() {
@@ -115,13 +117,15 @@ public abstract class Car implements Movable {
     }
 
     public void gas(double amount) {
-        double beforeGas = getCurrentSpeed();
-        if (amount < 0 || amount > 1) {
-            throw new IllegalArgumentException("illegal gas-value");
-        } else {
-            incrementSpeed(amount);
-            if (getCurrentSpeed() - beforeGas <0 ) {
-                currentSpeed = beforeGas;
+        if (EngineOn) {
+            double beforeGas = getCurrentSpeed();
+            if (amount < 0 || amount > 1) {
+                throw new IllegalArgumentException("illegal gas-value");
+            } else {
+                incrementSpeed(amount);
+                if (getCurrentSpeed() - beforeGas < 0) {
+                    currentSpeed = beforeGas;
+                }
             }
         }
 
