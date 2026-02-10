@@ -3,9 +3,10 @@ import java.util.ArrayList;
 
 public abstract class Car implements Movable {
 
+    // ---------------------------------- KLASSVARIABEL----------------------------------
     private static ArrayList<Car> allCars = new ArrayList<>(100);
 
-    // INSTANSVARIABLER
+    // ---------------------------------- INSTANSVARIABLER ----------------------------------
     private int nrDoors; // Number of doors on the car
     private double enginePower; // Engine power of the car
     private double currentSpeed; // The current speed of the car
@@ -23,7 +24,7 @@ public abstract class Car implements Movable {
         return allCars.get(i);
     }
 
-    //KONSTRUKTOR
+    // ---------------------------------- KONSTRUKTOR ----------------------------------
     public Car(int doors, double enginepower, Color c, String modelname, double len, double wid) {
         allCars.add(this);
 
@@ -42,9 +43,7 @@ public abstract class Car implements Movable {
         stopEngine();
     }
 
-
-    // METODER
-    // Get/Set-Metoder
+    // ---------------------------------- GET/SET_METODER ------------------------------------
     public int getRegNr() {
         return regNr;
     }
@@ -77,7 +76,24 @@ public abstract class Car implements Movable {
         color = clr;
     }
 
-    // Start/Stop - Engine
+    public int getDirection() {
+        return dir;
+    }
+
+    public Double[] getPosition() {
+        return new Double[]{xCoord, yCoord};
+    }
+
+    public void attachCar() {
+        isAttached = true;
+    }
+
+    public void deAttachCar() {
+        isAttached = false;
+    }
+
+
+    // ---------------------------------- SPEED_METODER ----------------------------------
     public void startEngine() {
         currentSpeed = 0.1;
     }
@@ -86,7 +102,6 @@ public abstract class Car implements Movable {
         currentSpeed = 0;
     }
 
-    //Abstrakta metoder
     protected double speedFactor() {
         return getEnginePower() * 0.01;
     }
@@ -97,56 +112,6 @@ public abstract class Car implements Movable {
 
     private void decrementSpeed(double amount) {
         currentSpeed = Math.max(currentSpeed - speedFactor() * amount, 0);
-    }
-
-    @Override
-    public void move() {
-        if      (dir == 0) xCoord -= currentSpeed;
-        else if (dir == 1) yCoord += currentSpeed;
-        else if (dir == 2) xCoord += currentSpeed;
-        else if (dir == 3) yCoord -= currentSpeed;
-    }
-
-    @Override
-    public void reverse() {
-        if      (dir == 0) xCoord += 20;
-        else if (dir == 1) yCoord -= 20 ;
-        else if (dir == 2) xCoord -= 20;
-        else if (dir == 3) yCoord += 20;
-    }
-
-
-    @Override
-    public void turnLeft() {
-        dir = (dir + 3) % 4;
-    }
-
-    @Override
-    public void turnRight() {
-        dir = (dir + 1) % 4;
-    }
-
-    public int getDirection() {
-        return dir;
-    }
-
-    public Double[] getPosition() {
-        return new Double[]{xCoord, yCoord};
-    }
-
-    public void follow(Car other) {
-        if(isAttached) {
-            this.xCoord = other.xCoord;
-            this.yCoord = other.yCoord;
-            this.dir = other.dir;
-        }
-    }
-
-    public void attachCar() {
-        isAttached = true;
-    }
-    public void deAttachCar() {
-        isAttached = false;
     }
 
     public void gas(double amount) {
@@ -171,6 +136,41 @@ public abstract class Car implements Movable {
             if (getCurrentSpeed() - beforeBreake > 0) {
                 currentSpeed = beforeBreake;
             }
+        }
+    }
+
+    // ---------------------------------- MOVABLE_METODER ----------------------------------
+    @Override
+    public void move() {
+        if      (dir == 0) xCoord -= currentSpeed;
+        else if (dir == 1) yCoord += currentSpeed;
+        else if (dir == 2) xCoord += currentSpeed;
+        else if (dir == 3) yCoord -= currentSpeed;
+    }
+
+    @Override
+    public void reverse() {
+        if      (dir == 0) xCoord += 20;
+        else if (dir == 1) yCoord -= 20 ;
+        else if (dir == 2) xCoord -= 20;
+        else if (dir == 3) yCoord += 20;
+    }
+
+    @Override
+    public void turnLeft() {
+        dir = (dir + 3) % 4;
+    }
+
+    @Override
+    public void turnRight() {
+        dir = (dir + 1) % 4;
+    }
+
+    public void follow(Car other) {
+        if(isAttached) {
+            this.xCoord = other.xCoord;
+            this.yCoord = other.yCoord;
+            this.dir = other.dir;
         }
     }
 } // class Car

@@ -3,13 +3,13 @@ import java.awt.*;
 public final class Saab95 extends Car{
     private boolean turboOn;
 
-    // KONSTRUKTOR
+    // ---------------------------------- KONSTRUKTOR ----------------------------------
     public Saab95(){
         super(2, 125, Color.red, "Saab95", 480, 179);
 	    turboOn = false;
     }
 
-    // METODER
+    // ---------------------------------- METODER ----------------------------------
     public void setTurboOn(){
 	    turboOn = true;
     }
