@@ -199,7 +199,5 @@ public class FirstTest {
         saab95Verkstad.load(new Saab95());
         // Capacity är 3
         Assert.assertTrue(saab95Verkstad.nrOfCars() == 3);
-
-
     }
 }
