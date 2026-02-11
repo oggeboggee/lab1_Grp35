@@ -17,7 +17,7 @@ public class Verkstad<T extends Car>{
 
     // ---------------------------------- METODER ----------------------------------
     public void load(T car) {
-        if (cars.size()<=capacity) {
+        if (cars.size()<capacity) {
             cars.add(car);
         }
     }
@@ -30,5 +30,9 @@ public class Verkstad<T extends Car>{
             }
         }
         return null;
+    }
+
+    public int nrOfCars() {
+        return cars.size();
     }
 }

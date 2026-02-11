@@ -123,16 +123,13 @@ public class FirstTest {
         Assert.assertTrue(volvo.getPosition()[0] == 0);
     }
 
-    Verkstad<Car> verkstad = new Verkstad<>(5);
-    Verkstad<Volvo240> volvo240Verkstad = new Verkstad<>(5);
-    Verkstad<Saab95> saab95Verkstad = new Verkstad<>(3);
 
     //SCANIA-TESTER
     Scania<Cargo> scania = new Scania<>();
 
     @Test
     public void testFlaktilt() {
-        // INC/DEC-TILT
+        // INC/DEC-TILT with currentSpeed = 0
         Assert.assertTrue(scania.getFlakTilt()==0);
         scania.incTilt(50);
         Assert.assertTrue(scania.getFlakTilt()!=0);
@@ -140,6 +137,12 @@ public class FirstTest {
         Assert.assertTrue(scania.getFlakTilt()==70);
         scania.decTilt(80);
         Assert.assertTrue(scania.getFlakTilt()==0);
+        // With currentSpeed > 0
+        scania.startEngine();
+        scania.gas(1);
+        scania.incTilt(50);
+        Assert.assertTrue(scania.getFlakTilt()==0);
+        scania.stopEngine();
     }
     @Test
     public void testScaniaMove() {
@@ -153,27 +156,50 @@ public class FirstTest {
         Assert.assertTrue(x != scania.getPosition()[0]
                 || y != scania.getPosition()[1]);
 
-        // Spara värden på x, y
+        // Spara ny pos
         x = scania.getPosition()[0];
         y = scania.getPosition()[1];
-        // Nu finns currentSpeed så då borde inte incTtilt funka
+
+        // Move med tiltat flak
+        scania.stopEngine();
         scania.incTilt(50);
-        Assert.assertTrue(scania.getFlakTilt()==0);
-        // Vi
+        scania.startEngine();
+        scania.gas(1);
         scania.move();
-        Assert.assertTrue(x != scania.getPosition()[0] || y != scania.getPosition()[1]);
+        Assert.assertTrue(scania.getPosition()[0] == x);
+        Assert.assertTrue(scania.getPosition()[1] == y);
     }
 
-    /*
+
+    // VERKSATDTESTER
+    Verkstad<Car> verkstad = new Verkstad<>(5);
+    Verkstad<Volvo240> volvo240Verkstad = new Verkstad<>(5);
+    Verkstad<Saab95> saab95Verkstad = new Verkstad<>(3);
+
     @Test
     public void testVerkstad(){
+        // Hämta ut från tom verkstad
         Assert.assertTrue(volvo240Verkstad.unload(volvo.getRegNr())==null);
-
+        // Testa hämta ut en saab som inte finns i verkstaden
         volvo240Verkstad.load(volvo);
         Assert.assertTrue(volvo240Verkstad.unload(saab.getRegNr())==null);
 
         verkstad.load(volvo);
-        Assert.assertTrue(verkstad.unload(volvo.getRegNr())==Volvo240.class);
+        verkstad.load(saab);
+        Car c = verkstad.unload(volvo.getRegNr());
+        Assert.assertTrue(c.getClass()==Volvo240.class);
+        c = verkstad.unload(saab.getRegNr());
+        Assert.assertTrue(c.getClass()!=Volvo240.class);
+
+
+        // Lämna in på en full
+        saab95Verkstad.load(new Saab95());
+        saab95Verkstad.load(new Saab95());
+        saab95Verkstad.load(new Saab95());
+        saab95Verkstad.load(new Saab95());
+        // Capacity är 3
+        Assert.assertTrue(saab95Verkstad.nrOfCars() == 3);
+
+
     }
-     */
 }
