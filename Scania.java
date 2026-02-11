@@ -1,18 +1,17 @@
 import java.awt.*;
 import java.util.ArrayList;
 
-public class Scania<T> extends Car implements Loadable<T>{
+public class Scania<Cargo> extends Car implements Loadable<Cargo>{
 
     // ---------------------------------- INSTANSVARIABLER ----------------------------------
-
-    private ArrayList<T> last;
+    private ArrayList<Cargo> cargo;
     private int flakTilt;
 
     // ---------------------------------- KONSTRUKTOR ----------------------------------
 
     public Scania() {
         super(2,100, Color.blue, "Scania", 1800, 260);
-        last = new ArrayList<>();
+        cargo = new ArrayList<>();
         flakTilt = 0;
     }
 
@@ -38,13 +37,13 @@ public class Scania<T> extends Car implements Loadable<T>{
     }
 
     @Override
-    public void load(T t) {
-        last.add(t);
+    public void load(Cargo c) {
+        cargo.add(c);
     }
 
     @Override
-    public T unload() {
-        if (last.isEmpty()) return null;
-        else return last.removeFirst();
+    public Cargo unload() {
+        if (cargo.isEmpty()) return null;
+        else return cargo.removeFirst();
     }
 }

@@ -123,4 +123,57 @@ public class FirstTest {
         Assert.assertTrue(volvo.getPosition()[0] == 0);
     }
 
+    Verkstad<Car> verkstad = new Verkstad<>(5);
+    Verkstad<Volvo240> volvo240Verkstad = new Verkstad<>(5);
+    Verkstad<Saab95> saab95Verkstad = new Verkstad<>(3);
+
+    //SCANIA-TESTER
+    Scania<Cargo> scania = new Scania<>();
+
+    @Test
+    public void testFlaktilt() {
+        // INC/DEC-TILT
+        Assert.assertTrue(scania.getFlakTilt()==0);
+        scania.incTilt(50);
+        Assert.assertTrue(scania.getFlakTilt()!=0);
+        scania.incTilt(50);
+        Assert.assertTrue(scania.getFlakTilt()==70);
+        scania.decTilt(80);
+        Assert.assertTrue(scania.getFlakTilt()==0);
+    }
+    @Test
+    public void testScaniaMove() {
+        double x = scania.getPosition()[0];
+        double y = scania.getPosition()[1];
+
+        //Testar om den rör sig när tilten är 0
+        scania.startEngine();
+        scania.gas(1);
+        scania.move();
+        Assert.assertTrue(x != scania.getPosition()[0]
+                || y != scania.getPosition()[1]);
+
+        // Spara värden på x, y
+        x = scania.getPosition()[0];
+        y = scania.getPosition()[1];
+        // Nu finns currentSpeed så då borde inte incTtilt funka
+        scania.incTilt(50);
+        Assert.assertTrue(scania.getFlakTilt()==0);
+        // Vi
+        scania.move();
+        Assert.assertTrue(x != scania.getPosition()[0] || y != scania.getPosition()[1]);
+    }
+
+    /*
+    @Test
+    public void testVerkstad(){
+        Assert.assertTrue(volvo240Verkstad.unload(volvo.getRegNr())==null);
+
+        volvo240Verkstad.load(volvo);
+        Assert.assertTrue(volvo240Verkstad.unload(saab.getRegNr())==null);
+
+        verkstad.load(volvo);
+        Assert.assertTrue(verkstad.unload(volvo.getRegNr())==Volvo240.class);
+    }
+     */
 }
