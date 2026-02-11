@@ -2,13 +2,14 @@ import java.awt.*;
 
 public class CarTransport extends Car implements Loadable<Car> {
     // ---------------------------------- INSTANSVARIABLER ----------------------------------
-    Car[] load;
-    boolean trailerIsUp;
-    int nrLoadedCars;
+    private Car[] load;
+    private boolean trailerIsUp;
+    private int nrLoadedCars;
 
     // ---------------------------------- KONSTRUKTOR ----------------------------------
     public CarTransport() {
         super(2, 100, Color.RED, "CarTransport", 1800, 220);
+        nrLoadedCars = 0;
         load = new Car[6];
         trailerIsUp = true;
     }
@@ -19,6 +20,9 @@ public class CarTransport extends Car implements Loadable<Car> {
     }
     public void trailerDown() {
         if (getCurrentSpeed()==0) trailerIsUp = false;
+    }
+    public int getNrLoadedCars() {
+        return nrLoadedCars;
     }
 
     // Den här metoden skulle kanske va i car? Eller position? Allt med en position borde kunna kolla hur nära de är
