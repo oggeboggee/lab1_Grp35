@@ -25,6 +25,15 @@ public class CarTransport extends Car implements Loadable<Car> {
         return nrLoadedCars;
     }
 
+    public Car[] getCars() {
+        return load;
+
+    }
+
+    public boolean gettrailerIsUp() {
+        return trailerIsUp;
+    }
+
     // Den här metoden skulle kanske va i car? Eller position? Allt med en position borde kunna kolla hur nära de är
     //      något annat med en position?
     public double carDistance(Car c) {

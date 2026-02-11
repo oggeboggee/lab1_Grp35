@@ -10,17 +10,20 @@ public class FirstTest {
     public void TestGetNrDoorsSaab() {
         Assert.assertTrue(saab.getNrDoors() == 2);
     }
+
     @Test
     public void TestGetNrDoorsVolvo() {
         Assert.assertTrue(volvo.getNrDoors() == 4);
     }
+
     @Test
     public void TestEnginePowerSaab() {
-        Assert.assertTrue(saab.getEnginePower()==125);
+        Assert.assertTrue(saab.getEnginePower() == 125);
     }
+
     @Test
     public void TestEnginePowerVolvo() {
-        Assert.assertTrue(volvo.getEnginePower()==100);
+        Assert.assertTrue(volvo.getEnginePower() == 100);
     }
 
     @Test
@@ -28,16 +31,17 @@ public class FirstTest {
         saab.startEngine();
         double speedBefore = saab.getCurrentSpeed();
         saab.gas(1);
-        Assert.assertTrue(saab.getCurrentSpeed()>speedBefore);
+        Assert.assertTrue(saab.getCurrentSpeed() > speedBefore);
         saab.stopEngine();
     }
+
     @Test
     public void TestBrake() {
         saab.startEngine();
         saab.gas(1);
         double speedBefore = saab.getCurrentSpeed();
         saab.brake(0.5);
-        Assert.assertTrue(saab.getCurrentSpeed()<speedBefore);
+        Assert.assertTrue(saab.getCurrentSpeed() < speedBefore);
         saab.stopEngine();
     }
 
@@ -46,8 +50,9 @@ public class FirstTest {
         Assert.assertTrue(saab.getDirection() == 0);
         Assert.assertTrue(volvo.getDirection() == 0);
     }
+
     @Test
-    public void TestTurnLeft(){
+    public void TestTurnLeft() {
         saab.turnLeft();
         Assert.assertTrue(saab.getDirection() == 3);
         saab.turnLeft();
@@ -66,8 +71,9 @@ public class FirstTest {
         volvo.turnLeft();
         Assert.assertTrue(volvo.getDirection() == 0);
     }
+
     @Test
-    public void TestTurnRight(){
+    public void TestTurnRight() {
         saab.turnRight();
         Assert.assertTrue(saab.getDirection() == 1);
         saab.turnRight();
@@ -86,8 +92,9 @@ public class FirstTest {
         volvo.turnRight();
         Assert.assertTrue(volvo.getDirection() == 0);
     }
+
     @Test
-    public void TestMove(){
+    public void TestMove() {
         saab.gas(1);
         saab.move();
         Assert.assertTrue(saab.getPosition()[0] == -(saab.getCurrentSpeed()));
@@ -130,20 +137,21 @@ public class FirstTest {
     @Test
     public void testFlaktilt() {
         // INC/DEC-TILT with currentSpeed = 0
-        Assert.assertTrue(scania.getFlakTilt()==0);
+        Assert.assertTrue(scania.getFlakTilt() == 0);
         scania.incTilt(50);
-        Assert.assertTrue(scania.getFlakTilt()!=0);
+        Assert.assertTrue(scania.getFlakTilt() != 0);
         scania.incTilt(50);
-        Assert.assertTrue(scania.getFlakTilt()==70);
+        Assert.assertTrue(scania.getFlakTilt() == 70);
         scania.decTilt(80);
-        Assert.assertTrue(scania.getFlakTilt()==0);
+        Assert.assertTrue(scania.getFlakTilt() == 0);
         // With currentSpeed > 0
         scania.startEngine();
         scania.gas(1);
         scania.incTilt(50);
-        Assert.assertTrue(scania.getFlakTilt()==0);
+        Assert.assertTrue(scania.getFlakTilt() == 0);
         scania.stopEngine();
     }
+
     @Test
     public void testScaniaMove() {
         double x = scania.getPosition()[0];
@@ -177,19 +185,19 @@ public class FirstTest {
     Verkstad<Saab95> saab95Verkstad = new Verkstad<>(3);
 
     @Test
-    public void testVerkstad(){
+    public void testVerkstad() {
         // Hämta ut från tom verkstad
-        Assert.assertTrue(volvo240Verkstad.unload(volvo.getRegNr())==null);
+        Assert.assertTrue(volvo240Verkstad.unload(volvo.getRegNr()) == null);
         // Testa hämta ut en saab som inte finns i verkstaden
         volvo240Verkstad.load(volvo);
-        Assert.assertTrue(volvo240Verkstad.unload(saab.getRegNr())==null);
+        Assert.assertTrue(volvo240Verkstad.unload(saab.getRegNr()) == null);
 
         verkstad.load(volvo);
         verkstad.load(saab);
         Car c = verkstad.unload(volvo.getRegNr());
-        Assert.assertTrue(c.getClass()==Volvo240.class);
+        Assert.assertTrue(c.getClass() == Volvo240.class);
         c = verkstad.unload(saab.getRegNr());
-        Assert.assertTrue(c.getClass()!=Volvo240.class);
+        Assert.assertTrue(c.getClass() != Volvo240.class);
 
 
         // Lämna in på en full
@@ -200,4 +208,61 @@ public class FirstTest {
         // Capacity är 3
         Assert.assertTrue(saab95Verkstad.nrOfCars() == 3);
     }
+
+    CarTransport carTransport = new CarTransport();
+
+    @Test
+    //Testar om värdet för trailerIsUp får rätt värden
+    public void FlakCarTransport() {
+        Assert.assertTrue(carTransport.gettrailerIsUp() == true);
+        carTransport.trailerUp();
+        Assert.assertTrue(carTransport.gettrailerIsUp() == true);
+        carTransport.trailerDown();
+        Assert.assertTrue(carTransport.gettrailerIsUp() == false);
+
+    }
+
+    @Test
+    //testar om rampen kan vara nere medans CarTransport kör
+    public void testMoveCarTransport() {
+        double xCT = carTransport.getPosition()[0];
+        double yCT = carTransport.getPosition()[1];
+        //kontrollerar så att positionen är [0,0]
+        Assert.assertTrue(xCT == 0 && yCT == 0);
+
+
+        //testar att köra med rampen nere
+        carTransport.trailerDown();
+        carTransport.startEngine();
+        carTransport.gas(1);
+        carTransport.move();
+        Assert.assertTrue(carTransport.getPosition()[0] == xCT && carTransport.getPosition()[1] == yCT);
+
+    }
+
+
+    Volvo240 car1 = new Volvo240();
+    Volvo240 car2 = new Volvo240();
+    Volvo240 car3 = new Volvo240();
+    Volvo240 car4 = new Volvo240();
+    Volvo240 car5 = new Volvo240();
+    Volvo240 car6 = new Volvo240();
+    Volvo240 car7 = new Volvo240();
+
+    @Test
+    public void loadCarOnCarTransport() {
+        carTransport.trailerDown();
+        carTransport.load(car1);
+
+        Assert.assertTrue(carTransport.getCars()[0] == car1);
+        carTransport.load(car2);
+        carTransport.load(car3);
+        carTransport.load(car4);
+        carTransport.load(car5);
+        carTransport.load(car6);
+        Assert.assertTrue(carTransport.getCars()[0] == car1);
+        Assert.assertTrue(carTransport.getCars()[1] == car2);
+
+    }
+
 }
