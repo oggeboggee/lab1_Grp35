@@ -1,10 +1,27 @@
 import junit.framework.Assert;
 import org.junit.Test;
 
+import java.awt.*;
+import java.util.Objects;
+
 // Hej
 public class FirstTest {
+
     Saab95 saab = new Saab95();
     Volvo240 volvo = new Volvo240();
+
+    @Test
+    public void TestGetCar(){
+        Assert.assertEquals(Car.getCar(0), saab);
+        Assert.assertEquals(Car.getCar(1), volvo);
+        Assert.assertEquals(Car.getCar(10), car7);
+    }
+
+    @Test
+    public void testMain(){
+        Main.main();
+    }
+
 
     @Test
     public void TestGetNrDoorsSaab() {
@@ -24,6 +41,70 @@ public class FirstTest {
     @Test
     public void TestEnginePowerVolvo() {
         Assert.assertTrue(volvo.getEnginePower() == 100);
+    }
+
+    @Test
+    public void TestCarSize() {
+        Assert.assertTrue(volvo.getLength() == 480);
+        Assert.assertTrue(saab.getLength() == 480);
+        Assert.assertTrue(volvo.getWidth() == 171);
+        Assert.assertTrue(saab.getWidth() == 179);
+    }
+
+    @Test
+    public void TestColor(){
+        Assert.assertTrue(volvo.getColor() == Color.BLACK);
+        Assert.assertTrue(saab.getColor() == Color.red);
+        volvo.setColor(Color.cyan);
+        saab.setColor(Color.BLUE);
+        Assert.assertTrue(volvo.getColor() == Color.cyan);
+        Assert.assertTrue(saab.getColor() == Color.BLUE);
+    }
+
+    @Test
+    public void TestFollow(){
+        volvo.startEngine();
+        volvo.gas(1);
+        volvo.turnLeft();
+        volvo.move();
+        Assert.assertFalse(volvo.getPosition()[1].equals(saab.getPosition()[1]));
+        Assert.assertTrue(volvo.getDirection() != saab.getDirection());
+        volvo.follow(saab);
+        Assert.assertFalse(volvo.getPosition()[1].equals(saab.getPosition()[1]));
+        Assert.assertTrue(volvo.getDirection() != saab.getDirection());
+        volvo.attachCar();
+        volvo.follow(saab);
+        Assert.assertTrue(volvo.getPosition()[1].equals(saab.getPosition()[1]));
+        Assert.assertTrue(volvo.getDirection() == saab.getDirection());
+        volvo.deAttachCar();
+        volvo.turnLeft();
+        volvo.move();
+        volvo.follow(saab);
+        Assert.assertFalse(volvo.getPosition()[1].equals(saab.getPosition()[1]));
+        Assert.assertTrue(volvo.getDirection() != saab.getDirection());
+
+    }
+
+    @Test
+    public void TestReverse(){
+        Assert.assertTrue(volvo.getPosition()[0] == 0);
+        Assert.assertTrue(volvo.getPosition()[1] == 0);
+        volvo.reverse();
+        Assert.assertTrue(volvo.getPosition()[0] == 20);
+        Assert.assertTrue(volvo.getPosition()[1] == 0);
+        volvo.turnLeft();
+        volvo.reverse();
+        Assert.assertTrue(volvo.getPosition()[0] == 20);
+        Assert.assertTrue(volvo.getPosition()[1] == 20);
+        volvo.turnLeft();
+        volvo.reverse();
+        Assert.assertTrue(volvo.getPosition()[0] == 0);
+        Assert.assertTrue(volvo.getPosition()[1] == 20);
+        volvo.turnLeft();
+        volvo.reverse();
+        Assert.assertTrue(volvo.getPosition()[0] == 0);
+        Assert.assertTrue(volvo.getPosition()[1] == 0);
+
     }
 
     @Test
@@ -130,9 +211,33 @@ public class FirstTest {
         Assert.assertTrue(volvo.getPosition()[0] == 0);
     }
 
+    @Test
+    public void testturbo(){
+        Assert.assertFalse(saab.getTurboState());
+        saab.setTurboOn();
+        Assert.assertTrue(saab.getTurboState());
+        saab.setTurboOff();
+        Assert.assertFalse(saab.getTurboState());
+    }
+    @Test
+    public void testSpeedFactor(){
+        Assert.assertTrue(volvo.speedFactor() == 1.25);
+        Assert.assertTrue(saab.speedFactor() == 1.25);
+        saab.setTurboOn();
+        Assert.assertTrue(saab.speedFactor() == 1.3 * 1.25);
+    }
+
 
     //SCANIA-TESTER
     Scania<Cargo> scania = new Scania<>();
+
+
+    @Test
+    public void testscaniaload(){
+        Assert.assertNull(scania.unload());
+        scania.load(Cargo.WOODPALLET);
+        Assert.assertEquals(scania.unload(), Cargo.WOODPALLET);
+    }
 
     @Test
     public void testFlaktilt() {
@@ -262,7 +367,19 @@ public class FirstTest {
         carTransport.load(car6);
         Assert.assertTrue(carTransport.getCars()[0] == car1);
         Assert.assertTrue(carTransport.getCars()[1] == car2);
+        Assert.assertTrue(carTransport.getNrLoadedCars() == 6);
+        Assert.assertTrue(carTransport.unload() == car6);
+        carTransport.unload();
+        carTransport.unload();
+        Assert.assertTrue(carTransport.getNrLoadedCars() == 3);
+        carTransport.unload();
+        carTransport.unload();
 
+        Assert.assertTrue(carTransport.getNrLoadedCars() == 1);
+        Assert.assertTrue(carTransport.unload() == car1);
+        Assert.assertTrue(carTransport.getNrLoadedCars() == 0);
+        Assert.assertNull(carTransport.unload());
+        Assert.assertTrue(carTransport.getNrLoadedCars() == 0);
     }
 
 }

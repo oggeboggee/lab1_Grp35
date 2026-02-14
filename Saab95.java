@@ -18,6 +18,8 @@ public final class Saab95 extends Car{
 	    turboOn = false;
     }
 
+    public boolean getTurboState() { return turboOn; }
+
     @Override
     public double speedFactor(){
         double turbo = 1;
