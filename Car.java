@@ -35,7 +35,7 @@ public abstract class Car implements Movable {
         modelName = modelname;
         xCoord = 0;
         yCoord = 0;
-        dir = 0;
+        dir = 2;
         length = len;
         width = wid;
         isAttached = false;
@@ -80,7 +80,7 @@ public abstract class Car implements Movable {
         return dir;
     }
 
-    public Double[] getPosition() {
+    public Double[] getPosition() { // Fixa till primitiv typ
         return new Double[]{xCoord, yCoord};
     }
 
@@ -170,11 +170,11 @@ public abstract class Car implements Movable {
         dir = (dir + 1) % 4;
     }
 
-    public void follow(Car other) {
+    public void follow(Double[] xy, int dir) {
         if(isAttached) {
-            this.xCoord = other.xCoord;
-            this.yCoord = other.yCoord;
-            this.dir = other.dir;
+            this.xCoord = xy[0];
+            this.yCoord = xy[1];
+            this.dir = dir;
         }
     }
 } // class Car

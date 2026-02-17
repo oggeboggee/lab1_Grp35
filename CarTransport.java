@@ -26,8 +26,7 @@ public class CarTransport extends Car implements Loadable<Car> {
     }
 
     public Car[] getCars() {
-        return load;
-
+        return load.clone();
     }
 
     public boolean gettrailerIsUp() {
@@ -48,7 +47,7 @@ public class CarTransport extends Car implements Loadable<Car> {
         if (trailerIsUp) {
             super.move();
             for (int i = 0; i < nrLoadedCars; i++) {
-                load[i].follow(this);
+                load[i].follow(this.getPosition(), this.getDirection());
             }
         }
     } // move
