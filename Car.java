@@ -148,6 +148,7 @@ public abstract class Car implements Movable {
         if      (dir == 0) {
             if (xCoord - currentSpeed >= 0) xCoord -= currentSpeed;
             else {
+                xCoord = 0;
                 stopEngine();
                 turnLeft();
                 turnLeft();
@@ -157,6 +158,7 @@ public abstract class Car implements Movable {
         else if (dir == 1) {
             if (yCoord - currentSpeed >= 0) yCoord -= currentSpeed;
             else {
+                yCoord = 0;
                 stopEngine();
                 turnLeft();
                 turnLeft();
@@ -166,6 +168,7 @@ public abstract class Car implements Movable {
         else if (dir == 2) {
             if (xCoord + currentSpeed <= 700) xCoord += currentSpeed;
             else {
+                xCoord = 700;
                 stopEngine();
                 turnLeft();
                 turnLeft();
@@ -175,6 +178,7 @@ public abstract class Car implements Movable {
         else if (dir == 3) {
             if (yCoord + currentSpeed <= 740) xCoord += currentSpeed;
             else {
+                yCoord = 740;
                 stopEngine();
                 turnLeft();
                 turnLeft();
