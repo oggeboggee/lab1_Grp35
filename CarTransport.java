@@ -7,8 +7,8 @@ public class CarTransport extends Car implements Loadable<Car> {
     private int nrLoadedCars;
 
     // ---------------------------------- KONSTRUKTOR ----------------------------------
-    public CarTransport() {
-        super(2, 100, Color.RED, "CarTransport", 1800, 220);
+    public CarTransport(double xCoord, double yCoord) {
+        super(2, 100, Color.RED, "CarTransport", 1800, 220, xCoord, yCoord);
         nrLoadedCars = 0;
         load = new Car[6];
         trailerIsUp = true;
@@ -33,28 +33,20 @@ public class CarTransport extends Car implements Loadable<Car> {
         return trailerIsUp;
     }
 
-    // Den här metoden skulle kanske va i car? Eller position? Allt med en position borde kunna kolla hur nära de är
-    //      något annat med en position?
-    public double carDistance(Car c) {
-        double diffX =  (Math.abs(getPosition()[0] - c.getPosition()[0]));
-        double diffY =  (Math.abs(getPosition()[1] - c.getPosition()[1]));
-        return Math.sqrt(Math.pow(diffX, 2) + Math.pow(diffY,2));
-    }
-
     // ---------------------------------- OVERRIDES ----------------------------------
     @Override
     public void move() {
         if (trailerIsUp) {
             super.move();
             for (int i = 0; i < nrLoadedCars; i++) {
-                load[i].follow(this.getPosition(), this.getDirection());
+                load[i].follow(pos, getDirection());
             }
         }
     } // move
 
     @Override
     public void load(Car c) {
-        if (carDistance(c) < 7 && !trailerIsUp) {
+        if (pos.distance(c.pos) < 7 && !trailerIsUp) {
             if ((nrLoadedCars < load.length) && (c.getClass() != CarTransport.class)) {
                 if (c.getWidth() < (getWidth() - 20)
                         && c.getLength() < 600) {

@@ -9,8 +9,8 @@ public class Scania<Cargo> extends Car implements Loadable<Cargo>{
 
     // ---------------------------------- KONSTRUKTOR ----------------------------------
 
-    public Scania() {
-        super(2,100, Color.blue, "Scania", 1800, 260);
+    public Scania(double xCoord, double yCoord) {
+        super(2,100, Color.blue, "Scania", 1800, 260, xCoord, yCoord);
         cargo = new ArrayList<>();
         flakTilt = 0;
     }

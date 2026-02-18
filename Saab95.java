@@ -4,8 +4,8 @@ public final class Saab95 extends Car{
     private boolean turboOn;
 
     // ---------------------------------- KONSTRUKTOR ----------------------------------
-    public Saab95(){
-        super(2, 125, Color.red, "Saab95", 480, 179);
+    public Saab95(double xCoord, double yCoord){
+        super(2, 125, Color.red, "Saab95", 480, 179, xCoord, yCoord);
 	    turboOn = false;
     }
 
@@ -23,7 +23,7 @@ public final class Saab95 extends Car{
     @Override
     public double speedFactor(){
         double turbo = 1;
-        if(turboOn) turbo = 100000; //1.3
+        if(turboOn) turbo = 1.3; //1.3
         return getEnginePower() * 0.01 * turbo;
     }
 }

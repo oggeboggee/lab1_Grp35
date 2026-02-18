@@ -3,16 +3,15 @@ import java.util.ArrayList;
 public class Verkstad<T extends Car>{
 
     // ---------------------------------- INSTANSVARIABLER ----------------------------------
-    private int xCord;
-    private int yCord;
-
+    public Position pos;
     private int capacity;
     private ArrayList<T> cars;
 
     // ---------------------------------- KONSTRUKTOR ----------------------------------
-    public Verkstad(int capacity) {
+    public Verkstad(int capacity, double xCoord, double yCoord) {
         this.capacity = capacity;
         cars = new ArrayList<>(capacity);
+        pos = new Position(xCoord, yCoord);
     }
 
     // ---------------------------------- METODER ----------------------------------

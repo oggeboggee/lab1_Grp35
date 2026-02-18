@@ -12,9 +12,11 @@ public abstract class Car implements Movable {
     private double currentSpeed; // The current speed of the car
     private Color color; // Color of the car
     private String modelName; // The car model name
-    private double xCoord; // x-coordinate of the car
-    private double yCoord; // x-coordinate of the car
+    public Position pos;
     private int dir; // direction of the car (0 = -x, 1 = +y, 2 = +x, 3 = -y)
+    //
+    // btw +y är nedåt så jag switchade turnLeft() och turnRight() metoderna
+    //
     private double length; // length of car in cm
     private double width; // width of car in cm
     private boolean isAttached;
@@ -26,16 +28,15 @@ public abstract class Car implements Movable {
     }
 
     // ---------------------------------- KONSTRUKTOR ----------------------------------
-    public Car(int doors, double enginepower, Color c, String modelname, double len, double wid) {
+    public Car(int doors, double enginepower, Color c, String modelname, double len, double wid, double xCoord, double yCoord) {
         allCars.add(this);
 
         nrDoors = doors;
         enginePower = enginepower;
         color = c;
         modelName = modelname;
-        xCoord = 0;
-        yCoord = 0;
-        dir = 2;
+        pos = new Position(xCoord, yCoord);
+        dir = 0;
         length = len;
         width = wid;
         isAttached = false;
@@ -78,10 +79,6 @@ public abstract class Car implements Movable {
 
     public int getDirection() {
         return dir;
-    }
-
-    public Double[] getPosition() { // Fixa till primitiv typ
-        return new Double[]{xCoord, yCoord};
     }
 
     public void attachCar() {
@@ -146,30 +143,30 @@ public abstract class Car implements Movable {
     @Override
     public void move() {
         if      (dir == 0) {
-            if (xCoord - currentSpeed >= 0) xCoord -= currentSpeed;
+            if (pos.x - currentSpeed >= 0) pos.x -= currentSpeed;
             else {
-                xCoord = 0;
-                vänd();
-            }
-        }
-        else if (dir == 1) {
-            if (yCoord - currentSpeed >= 0) yCoord -= currentSpeed;
-            else {
-                yCoord = 0;
-                vänd();
-            }
-        }
-        else if (dir == 2) {
-            if (xCoord + currentSpeed <= 700) xCoord += currentSpeed;
-            else {
-                xCoord = 700;
+                pos.x = 0;
                 vänd();
             }
         }
         else if (dir == 3) {
-            if (yCoord + currentSpeed <= 500) yCoord += currentSpeed;
+            if (pos.y - currentSpeed >= 0) pos.y -= currentSpeed;
             else {
-                yCoord = 500;
+                pos.y = 0;
+                vänd();
+            }
+        }
+        else if (dir == 2) {
+            if (pos.x + currentSpeed <= 700) pos.x += currentSpeed;
+            else {
+                pos.x = 700;
+                vänd();
+            }
+        }
+        else if (dir == 1) {
+            if (pos.y + currentSpeed <= 500) pos.y += currentSpeed;
+            else {
+                pos.y = 500;
                 vänd();
             }
         }
@@ -177,34 +174,32 @@ public abstract class Car implements Movable {
     private void vänd(){
         stopEngine();
         turnRight();
-        //turnLeft();
-        //turnLeft();
+        turnRight();
         startEngine();
     }
 
     @Override
     public void reverse() {
-        if      (dir == 0) xCoord += 20;
-        else if (dir == 1) yCoord -= 20 ;
-        else if (dir == 2) xCoord -= 20;
-        else if (dir == 3) yCoord += 20;
+        if      (dir == 0) pos.x += 20;
+        else if (dir == 1) pos.y -= 20 ;
+        else if (dir == 2) pos.x -= 20;
+        else if (dir == 3) pos.y += 20;
     }
 
     @Override
     public void turnLeft() {
-        dir = (dir + 3) % 4;
+        dir = (dir + 1) % 4;
     }
 
     @Override
     public void turnRight() {
-        dir = (dir + 1) % 4;
+        dir = (dir + 3) % 4;
     }
 
-    public void follow(Double[] xy, int dir) {
+    public void follow(Position POS, int direction) {
         if(isAttached) {
-            this.xCoord = xy[0];
-            this.yCoord = xy[1];
-            this.dir = dir;
+            pos.set(POS);
+            dir = direction;
         }
     }
 } // class Car

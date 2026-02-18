@@ -23,7 +23,7 @@ public class CarController {
     // A list of cars, modify if needed
     ArrayList<Car> cars = new ArrayList<>();
     //Verkstad
-    Verkstad<Volvo240> volvo240Verkstad = new Verkstad<>(6);
+    Verkstad<Volvo240> volvo240Verkstad = new Verkstad<>(6, 0, 0);
 
 
     //methods:
@@ -32,9 +32,9 @@ public class CarController {
         // Instance of this class
         CarController cc = new CarController();
 
-        cc.cars.add(new Volvo240());
-        cc.cars.add(new Saab95());
-        cc.cars.add(new Scania<Cargo>());
+        cc.cars.add(new Volvo240(0, 0));
+        cc.cars.add(new Saab95(0, 100));
+        cc.cars.add(new Scania<Cargo>(0, 400));
 
         // Start a new view and send a reference of self
         cc.frame = new CarView("CarSim 1.0", cc);
@@ -50,9 +50,7 @@ public class CarController {
         public void actionPerformed(ActionEvent e) {
             for (Car car : cars) {
                 car.move();
-                int x = (int) Math.round(car.getPosition()[0]);
-                int y = (int) Math.round(car.getPosition()[1]);
-                frame.drawPanel.moveit(x, y, car);
+                frame.drawPanel.moveit(car);
                 // repaint() calls the paintComponent method of the panel
                 frame.drawPanel.repaint();
             }
