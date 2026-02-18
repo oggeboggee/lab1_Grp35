@@ -149,42 +149,37 @@ public abstract class Car implements Movable {
             if (xCoord - currentSpeed >= 0) xCoord -= currentSpeed;
             else {
                 xCoord = 0;
-                stopEngine();
-                turnLeft();
-                turnLeft();
-                startEngine();
+                vänd();
             }
         }
         else if (dir == 1) {
             if (yCoord - currentSpeed >= 0) yCoord -= currentSpeed;
             else {
                 yCoord = 0;
-                stopEngine();
-                turnLeft();
-                turnLeft();
-                startEngine();
+                vänd();
             }
         }
         else if (dir == 2) {
             if (xCoord + currentSpeed <= 700) xCoord += currentSpeed;
             else {
                 xCoord = 700;
-                stopEngine();
-                turnLeft();
-                turnLeft();
-                startEngine();
+                vänd();
             }
         }
         else if (dir == 3) {
-            if (yCoord + currentSpeed <= 740) xCoord += currentSpeed;
+            if (yCoord + currentSpeed <= 500) yCoord += currentSpeed;
             else {
-                yCoord = 740;
-                stopEngine();
-                turnLeft();
-                turnLeft();
-                startEngine();
+                yCoord = 500;
+                vänd();
             }
         }
+    }
+    private void vänd(){
+        stopEngine();
+        turnRight();
+        //turnLeft();
+        //turnLeft();
+        startEngine();
     }
 
     @Override
