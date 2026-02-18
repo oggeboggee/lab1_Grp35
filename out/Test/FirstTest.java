@@ -24,7 +24,6 @@ public class FirstTest {
         Main.main();
     }
 
-
     @Test
     public void TestGetNrDoorsSaab() {
         Assert.assertTrue(saab.getNrDoors() == 2);
@@ -71,17 +70,17 @@ public class FirstTest {
         volvo.move();
         Assert.assertFalse(volvo.getPosition()[1].equals(saab.getPosition()[1]));
         Assert.assertTrue(volvo.getDirection() != saab.getDirection());
-        volvo.follow(saab);
+        volvo.follow(saab.getPosition(), saab.getDirection());
         Assert.assertFalse(volvo.getPosition()[1].equals(saab.getPosition()[1]));
         Assert.assertTrue(volvo.getDirection() != saab.getDirection());
         volvo.attachCar();
-        volvo.follow(saab);
+        volvo.follow(saab.getPosition(), saab.getDirection());
         Assert.assertTrue(volvo.getPosition()[1].equals(saab.getPosition()[1]));
         Assert.assertTrue(volvo.getDirection() == saab.getDirection());
         volvo.deAttachCar();
         volvo.turnLeft();
         volvo.move();
-        volvo.follow(saab);
+        volvo.follow(saab.getPosition(), saab.getDirection());
         Assert.assertFalse(volvo.getPosition()[1].equals(saab.getPosition()[1]));
         Assert.assertTrue(volvo.getDirection() != saab.getDirection());
 
