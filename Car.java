@@ -96,7 +96,6 @@ public abstract class Car implements Movable {
     // ---------------------------------- SPEED_METODER ----------------------------------
     public void startEngine() {
         EngineOn = true;
-        currentSpeed = 0.1;
     }
 
     public void stopEngine() {
@@ -146,10 +145,42 @@ public abstract class Car implements Movable {
     // ---------------------------------- MOVABLE_METODER ----------------------------------
     @Override
     public void move() {
-        if      (dir == 0) xCoord -= currentSpeed;
-        else if (dir == 1) yCoord += currentSpeed;
-        else if (dir == 2) xCoord += currentSpeed;
-        else if (dir == 3) yCoord -= currentSpeed;
+        if      (dir == 0) {
+            if (xCoord - currentSpeed >= 0) xCoord -= currentSpeed;
+            else {
+                stopEngine();
+                turnLeft();
+                turnLeft();
+                startEngine();
+            }
+        }
+        else if (dir == 1) {
+            if (yCoord + currentSpeed >= 0) yCoord -= currentSpeed;
+            else {
+                stopEngine();
+                turnLeft();
+                turnLeft();
+                startEngine();
+            }
+        }
+        else if (dir == 2) {
+            if (xCoord + currentSpeed >= 800) xCoord -= currentSpeed;
+            else {
+                stopEngine();
+                turnLeft();
+                turnLeft();
+                startEngine();
+            }
+        }
+        else if (dir == 3) {
+            if (xCoord + currentSpeed >= 800) xCoord -= currentSpeed;
+            else {
+                stopEngine();
+                turnLeft();
+                turnLeft();
+                startEngine();
+            }
+        }
     }
 
     @Override
