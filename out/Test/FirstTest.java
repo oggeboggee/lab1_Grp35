@@ -69,43 +69,45 @@ public class FirstTest {
         volvo.gas(1);
         volvo.turnLeft();
         volvo.move();
-        Assert.assertFalse(volvo.pos.y == saab.pos.y);
+        Assert.assertTrue(volvo.getPos().getY() != saab.getPos().getY());
         Assert.assertTrue(volvo.getDirection() != saab.getDirection());
-        volvo.follow(saab.pos, saab.getDirection());
-        Assert.assertFalse(volvo.pos.y == saab.pos.y);
+        volvo.follow(saab.getPos(), saab.getDirection());
+        Assert.assertTrue(volvo.getPos().getY() != saab.getPos().getY());
         Assert.assertTrue(volvo.getDirection() != saab.getDirection());
         volvo.attachCar();
-        volvo.follow(saab.pos, saab.getDirection());
-        Assert.assertTrue(volvo.pos.y == saab.pos.y);
+        volvo.follow(saab.getPos(), saab.getDirection());
+        Assert.assertTrue(volvo.getPos().getY() == saab.getPos().getY());
         Assert.assertTrue(volvo.getDirection() == saab.getDirection());
         volvo.deAttachCar();
+        volvo.startEngine();
+        volvo.gas(1);
         volvo.turnLeft();
         volvo.move();
-        volvo.follow(saab.pos, saab.getDirection());
-        Assert.assertFalse(volvo.pos.y == saab.pos.y);
+        volvo.follow(saab.getPos(), saab.getDirection());
+        Assert.assertTrue(volvo.getPos().getY() != saab.getPos().getY());
         Assert.assertTrue(volvo.getDirection() != saab.getDirection());
 
     }
 
     @Test
     public void TestReverse(){
-        Assert.assertTrue(volvo.pos.x == 0);
-        Assert.assertTrue(volvo.pos.y == 0);
+        Assert.assertTrue(volvo.getPos().getX() == 0);
+        Assert.assertTrue(volvo.getPos().getY() == 0);
         volvo.reverse();
-        Assert.assertTrue(volvo.pos.x == 20);
-        Assert.assertTrue(volvo.pos.y == 0);
+        Assert.assertTrue(volvo.getPos().getX() == 20);
+        Assert.assertTrue(volvo.getPos().getY() == 0);
         volvo.turnRight();
         volvo.reverse();
-        Assert.assertTrue(volvo.pos.x == 20);
-        Assert.assertTrue(volvo.pos.y == 20);
+        Assert.assertTrue(volvo.getPos().getX() == 20);
+        Assert.assertTrue(volvo.getPos().getY() == 20);
         volvo.turnRight();
         volvo.reverse();
-        Assert.assertTrue(volvo.pos.x == 0);
-        Assert.assertTrue(volvo.pos.y == 20);
+        Assert.assertTrue(volvo.getPos().getX() == 0);
+        Assert.assertTrue(volvo.getPos().getY() == 20);
         volvo.turnRight();
         volvo.reverse();
-        Assert.assertTrue(volvo.pos.x == 0);
-        Assert.assertTrue(volvo.pos.y == 0);
+        Assert.assertTrue(volvo.getPos().getX() == 0);
+        Assert.assertTrue(volvo.getPos().getY() == 0);
 
     }
 
@@ -182,39 +184,39 @@ public class FirstTest {
         saab.gas(1);
         saab.turnLeft();
         saab.move();
-        Assert.assertTrue(saab.pos.x == 0);
-        Assert.assertTrue(saab.pos.y == 1.25);
+        Assert.assertTrue(saab.getPos().getX() == 0);
+        Assert.assertTrue(saab.getPos().getY() == 1.25);
         saab.turnLeft();
         saab.move();
-        Assert.assertTrue(saab.pos.x == 1.25);
-        Assert.assertTrue(saab.pos.y == 1.25);
+        Assert.assertTrue(saab.getPos().getX() == 1.25);
+        Assert.assertTrue(saab.getPos().getY() == 1.25);
         saab.turnLeft();
         saab.move();
-        Assert.assertTrue(saab.pos.x == 1.25);
-        Assert.assertTrue(saab.pos.y == 0);
+        Assert.assertTrue(saab.getPos().getX() == 1.25);
+        Assert.assertTrue(saab.getPos().getY() == 0);
         saab.turnLeft();
         saab.move();
-        Assert.assertTrue(saab.pos.x == 0);
-        Assert.assertTrue(saab.pos.y == 0);
+        Assert.assertTrue(saab.getPos().getX() == 0);
+        Assert.assertTrue(saab.getPos().getY() == 0);
 
         volvo.startEngine();
         volvo.gas(1);
         volvo.turnLeft();
         volvo.move();
-        Assert.assertTrue(volvo.pos.x == 0);
-        Assert.assertTrue(volvo.pos.y == 1.25);
+        Assert.assertTrue(volvo.getPos().getX() == 0);
+        Assert.assertTrue(volvo.getPos().getY() == 1.25);
         volvo.turnLeft();
         volvo.move();
-        Assert.assertTrue(volvo.pos.x == 1.25);
-        Assert.assertTrue(volvo.pos.y == 1.25);
+        Assert.assertTrue(volvo.getPos().getX() == 1.25);
+        Assert.assertTrue(volvo.getPos().getY() == 1.25);
         volvo.turnLeft();
         volvo.move();
-        Assert.assertTrue(volvo.pos.x == 1.25);
-        Assert.assertTrue(volvo.pos.y == 0);
+        Assert.assertTrue(volvo.getPos().getX() == 1.25);
+        Assert.assertTrue(volvo.getPos().getY() == 0);
         volvo.turnLeft();
         volvo.move();
-        Assert.assertTrue(volvo.pos.x == 0);
-        Assert.assertTrue(volvo.pos.y == 0);
+        Assert.assertTrue(volvo.getPos().getX() == 0);
+        Assert.assertTrue(volvo.getPos().getY() == 0);
     }
 
     @Test
@@ -265,17 +267,17 @@ public class FirstTest {
 
     @Test
     public void testScaniaMove() {
-        Position pos = new Position(scania.pos.x, scania.pos.y);
+        Position pos = new Position(scania.getPos().getX(), scania.getPos().getY());
         //Testar om den rör sig när tilten är 0
         scania.startEngine();
         scania.gas(1);
         scania.turnLeft();
         scania.move();
-        //Assert.assertTrue(pos.x != scania.pos.x || pos.y != scania.pos.y);
-        Assert.assertTrue(scania.pos.distance(pos) != 0);
+        //Assert.assertTrue(pos.getX() != scania.getPos().getX() || pos.getY() != scania.getPos().getY());
+        Assert.assertTrue(scania.getPos().distance(pos) != 0);
 
         // Spara ny pos
-        pos = new Position(scania.pos.x, scania.pos.y);
+        pos = new Position(scania.getPos().getX(), scania.getPos().getY());
 
         // Move med tiltat flak
         scania.stopEngine();
@@ -283,8 +285,8 @@ public class FirstTest {
         scania.startEngine();
         scania.gas(1);
         scania.move();
-        Assert.assertTrue(scania.pos.x == pos.x);
-        Assert.assertTrue(scania.pos.y == pos.y);
+        Assert.assertTrue(scania.getPos().getX() == pos.getX());
+        Assert.assertTrue(scania.getPos().getY() == pos.getY());
     }
 
 
@@ -300,7 +302,7 @@ public class FirstTest {
         // Testa hämta ut en saab som inte finns i verkstaden
         volvo240Verkstad.load(volvo);
         Assert.assertTrue(volvo240Verkstad.unload(saab.getRegNr()) == null);
-
+        volvo240Verkstad.unload(volvo.getRegNr());
         verkstad.load(volvo);
         verkstad.load(saab);
         Car c = verkstad.unload(volvo.getRegNr());
@@ -334,9 +336,9 @@ public class FirstTest {
     @Test
     //testar om rampen kan vara nere medans CarTransport kör
     public void testMoveCarTransport() {
-        Position posCT = new Position(carTransport.pos.x, carTransport.pos.y);
+        Position posCT = new Position(carTransport.getPos().getX(), carTransport.getPos().getY());
         //kontrollerar så att positionen är [0,0]
-        Assert.assertTrue(posCT.x == 0 && posCT.y == 0);
+        Assert.assertTrue(posCT.getX() == 0 && posCT.getY() == 0);
 
         //testar att köra med rampen nere
         carTransport.trailerDown();
@@ -344,7 +346,7 @@ public class FirstTest {
         carTransport.startEngine();
         carTransport.gas(1);
         carTransport.move();
-        Assert.assertTrue(carTransport.pos.x == posCT.x && carTransport.pos.y == posCT.y);
+        Assert.assertTrue(carTransport.getPos().getX() == posCT.getX() && carTransport.getPos().getY() == posCT.getY());
 
     }
 

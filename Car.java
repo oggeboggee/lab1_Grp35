@@ -158,7 +158,7 @@ public abstract class Car implements Movable {
             }
         }
         else if (dir == 3) {
-            if (pos.getY() - currentSpeed >= 0) pos.set(pos.getX()-currentSpeed, pos.getY()); //pos.y -= currentSpeed;
+            if (pos.getY() - currentSpeed >= 0) pos.set(pos.getX(), pos.getY()-currentSpeed); //pos.y -= currentSpeed;
             else {
                 pos.set(pos.getX(), 0);//pos.y = 0;
                 vänd();
@@ -172,7 +172,7 @@ public abstract class Car implements Movable {
             }
         }
         else if (dir == 1) {
-            if (pos.getY() + currentSpeed <= 500) pos.set(pos.getX(), pos.getY()+currentSpeed);//pos.y += currentSpeed;
+            if (pos.getY() + currentSpeed <= 500) pos.set(pos.getX(), pos.getY() + currentSpeed);//pos.y += currentSpeed;
             else {
                 pos.set(pos.getX(), 500);//pos.y = 500;
                 vänd();
