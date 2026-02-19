@@ -44,6 +44,6 @@ public class Scania<Cargo> extends Car implements Loadable<Cargo>{
     @Override
     public Cargo unload() {
         if (cargo.isEmpty()) return null;
-        else return cargo.removeFirst();
+        else return cargo.removeLast();
     }
 }

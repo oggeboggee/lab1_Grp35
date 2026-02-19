@@ -29,6 +29,10 @@ public class CarView extends JFrame{
     int gasAmount = 0;
     JLabel gasLabel = new JLabel("Amount of gas");
 
+    JSpinner tiltSpinner = new JSpinner();
+    int tiltAmount = 0;
+    JLabel tiltLabel = new JLabel("Amount of tilt");
+
     JButton gasButton = new JButton("Gas");
     JButton brakeButton = new JButton("Brake");
     JButton turboOnButton = new JButton("Saab Turbo on");
@@ -56,21 +60,37 @@ public class CarView extends JFrame{
         this.add(drawPanel);
 
 
-        SpinnerModel spinnerModel =
+        SpinnerModel spinnerModelGas =
                 new SpinnerNumberModel(0, //initial value
                         0, //min
                         100, //max
                         1);//step
-        gasSpinner = new JSpinner(spinnerModel);
+        gasSpinner = new JSpinner(spinnerModelGas);
         gasSpinner.addChangeListener(new ChangeListener() {
             public void stateChanged(ChangeEvent e) {
                 gasAmount = (int) ((JSpinner)e.getSource()).getValue();
             }
         });
 
-        gasPanel.setLayout(new BorderLayout());
-        gasPanel.add(gasLabel, BorderLayout.PAGE_START);
-        gasPanel.add(gasSpinner, BorderLayout.PAGE_END);
+        SpinnerModel spinnerModelTilt =
+                new SpinnerNumberModel(0, //initial value
+                        0, //min
+                        70, //max
+                        1);//step
+        tiltSpinner = new JSpinner(spinnerModelTilt);
+        tiltSpinner.addChangeListener(new ChangeListener() {
+            public void stateChanged(ChangeEvent e) {
+                tiltAmount = (int) ((JSpinner)e.getSource()).getValue();
+            }
+        });
+
+        gasPanel.setLayout(new FlowLayout());
+        gasPanel.add(gasLabel);
+        gasPanel.add(gasSpinner);
+        gasPanel.add(tiltLabel);
+        gasPanel.add(tiltSpinner);
+
+
 
         this.add(gasPanel);
 
@@ -140,6 +160,20 @@ public class CarView extends JFrame{
             @Override
             public void actionPerformed(ActionEvent e) {
                 carC.stopAllCars();
+            }
+        });
+
+        liftBedButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                carC.flakTiltInc(tiltAmount);
+            }
+        });
+
+        lowerBedButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                carC.flakTiltDec(tiltAmount);
             }
         });
 

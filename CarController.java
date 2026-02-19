@@ -23,7 +23,7 @@ public class CarController {
     // A list of cars, modify if needed
     ArrayList<Car> cars = new ArrayList<>();
     //Verkstad
-    Verkstad<Volvo240> volvo240Verkstad = new Verkstad<>(6, 0, 0);
+    Verkstad<Volvo240> volvo240Verkstad = new Verkstad<>(6, 300, 300);
 
 
     //methods:
@@ -32,7 +32,7 @@ public class CarController {
         // Instance of this class
         CarController cc = new CarController();
 
-        cc.cars.add(new Volvo240(0, 0));
+        cc.cars.add(new Volvo240(0, 300));
         cc.cars.add(new Saab95(0, 100));
         cc.cars.add(new Scania<Cargo>(0, 400));
 
@@ -51,6 +51,12 @@ public class CarController {
             for (Car car : cars) {
                 car.move();
                 frame.drawPanel.moveit(car);
+                if (car instanceof Volvo240 && car.getPos().distance(volvo240Verkstad.pos)<10
+                        && !car.getIsAttached()){
+                    volvo240Verkstad.load((Volvo240) car);
+                    car.stopEngine();
+                    System.out.println(volvo240Verkstad.nrOfCars());
+                }
                 // repaint() calls the paintComponent method of the panel
                 frame.drawPanel.repaint();
             }
@@ -95,6 +101,24 @@ public class CarController {
         for (Car car : cars) {
             if (car instanceof Saab95) {
                 ((Saab95) car).setTurboOff();
+            }
+        }
+    }
+
+    void flakTiltInc(int amount) {
+        for (Car car : cars) {
+            if (car instanceof Scania<?>) {
+                ((Scania<?>) car).incTilt(amount);
+                System.out.println(((Scania<?>) car).getFlakTilt());
+            }
+        }
+    }
+
+    void flakTiltDec(int amount) {
+        for (Car car : cars) {
+            if (car instanceof Scania<?>) {
+                ((Scania<?>) car).decTilt(amount);
+                System.out.println(((Scania<?>) car).getFlakTilt());
             }
         }
     }

@@ -12,7 +12,7 @@ public class DrawPanel extends JPanel{
     // Just a single image, TODO: Generalize
     BufferedImage volvoImage;
     // To keep track of a single car's position
-    Point volvoPoint = new Point();
+    Point volvoPoint = new Point(0, 300);
 
     // Lägg till Saab och Scania
     BufferedImage saabImage;
@@ -26,8 +26,8 @@ public class DrawPanel extends JPanel{
 
     // TODO: Make this general for all cars
     void moveit(Car car){
-        int x = Math.toIntExact(Math.round(car.pos.x));
-        int y = Math.toIntExact(Math.round(car.pos.y));
+        int x = Math.toIntExact(Math.round(car.getPos().getX()));
+        int y = Math.toIntExact(Math.round(car.getPos().getY()));
 
         if (car instanceof Volvo240) {
             volvoPoint.x = x;

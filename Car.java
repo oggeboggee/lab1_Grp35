@@ -12,7 +12,7 @@ public abstract class Car implements Movable {
     private double currentSpeed; // The current speed of the car
     private Color color; // Color of the car
     private String modelName; // The car model name
-    public Position pos;
+    private Position pos;
     private int dir; // direction of the car (0 = -x, 1 = +y, 2 = +x, 3 = -y)
     //
     // btw +y är nedåt så jag switchade turnLeft() och turnRight() metoderna
@@ -49,6 +49,10 @@ public abstract class Car implements Movable {
         return regNr;
     }
 
+    public Position getPos() {
+        return pos;
+    }
+
     public int getNrDoors() {
         return nrDoors;
     }
@@ -82,6 +86,7 @@ public abstract class Car implements Movable {
     }
 
     public void attachCar() {
+        stopEngine();
         isAttached = true;
     }
 
@@ -89,10 +94,13 @@ public abstract class Car implements Movable {
         isAttached = false;
     }
 
+    public boolean getIsAttached() {
+        return isAttached;
+    }
 
     // ---------------------------------- SPEED_METODER ----------------------------------
     public void startEngine() {
-        EngineOn = true;
+        if (!isAttached) EngineOn = true;
     }
 
     public void stopEngine() {
@@ -143,34 +151,35 @@ public abstract class Car implements Movable {
     @Override
     public void move() {
         if      (dir == 0) {
-            if (pos.x - currentSpeed >= 0) pos.x -= currentSpeed;
+            if (pos.getX() - currentSpeed >= 0) pos.set(pos.getX()-currentSpeed, pos.getY()); //pos.x -= currentSpeed;
             else {
-                pos.x = 0;
+                pos.set(0,pos.getY()); //pos.x = 0;
                 vänd();
             }
         }
         else if (dir == 3) {
-            if (pos.y - currentSpeed >= 0) pos.y -= currentSpeed;
+            if (pos.getY() - currentSpeed >= 0) pos.set(pos.getX()-currentSpeed, pos.getY()); //pos.y -= currentSpeed;
             else {
-                pos.y = 0;
+                pos.set(pos.getX(), 0);//pos.y = 0;
                 vänd();
             }
         }
         else if (dir == 2) {
-            if (pos.x + currentSpeed <= 700) pos.x += currentSpeed;
+            if (pos.getX() + currentSpeed <= 700) pos.set(pos.getX()+currentSpeed, pos.getY()); //pos.x += currentSpeed;
             else {
-                pos.x = 700;
+                pos.set(700, pos.getY());//pos.x = 700;
                 vänd();
             }
         }
         else if (dir == 1) {
-            if (pos.y + currentSpeed <= 500) pos.y += currentSpeed;
+            if (pos.getY() + currentSpeed <= 500) pos.set(pos.getX(), pos.getY()+currentSpeed);//pos.y += currentSpeed;
             else {
-                pos.y = 500;
+                pos.set(pos.getX(), 500);//pos.y = 500;
                 vänd();
             }
         }
     }
+
     private void vänd(){
         stopEngine();
         turnRight();
@@ -180,10 +189,10 @@ public abstract class Car implements Movable {
 
     @Override
     public void reverse() {
-        if      (dir == 0) pos.x += 20;
-        else if (dir == 1) pos.y -= 20 ;
-        else if (dir == 2) pos.x -= 20;
-        else if (dir == 3) pos.y += 20;
+        if      (dir == 0) pos.set(pos.getX()+20, pos.getY());// pos.x += 20;
+        else if (dir == 1) pos.set(pos.getX(), pos.getY()-20);//pos.y -= 20 ;
+        else if (dir == 2) pos.set(pos.getX()-20, pos.getY());//pos.x -= 20;
+        else if (dir == 3) pos.set(pos.getX(), pos.getY()+20);//pos.y += 20;
     }
 
     @Override

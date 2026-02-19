@@ -16,8 +16,9 @@ public class Verkstad<T extends Car>{
 
     // ---------------------------------- METODER ----------------------------------
     public void load(T car) {
-        if (cars.size()<capacity) {
+        if (cars.size()<capacity && !car.getIsAttached()) {
             cars.add(car);
+            car.attachCar();
         }
     }
 
@@ -25,6 +26,7 @@ public class Verkstad<T extends Car>{
         for (T car : cars) {
             if (car.getRegNr() == regNr) {
                 cars.remove(car);
+                car.deAttachCar();
                 return car;
             }
         }

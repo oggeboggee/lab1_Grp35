@@ -39,14 +39,14 @@ public class CarTransport extends Car implements Loadable<Car> {
         if (trailerIsUp) {
             super.move();
             for (int i = 0; i < nrLoadedCars; i++) {
-                load[i].follow(pos, getDirection());
+                load[i].follow(this.getPos(), getDirection());
             }
         }
     } // move
 
     @Override
     public void load(Car c) {
-        if (pos.distance(c.pos) < 7 && !trailerIsUp) {
+        if (this.getPos().distance(c.getPos()) < 7 && !trailerIsUp) {
             if ((nrLoadedCars < load.length) && (c.getClass() != CarTransport.class)) {
                 if (c.getWidth() < (getWidth() - 20)
                         && c.getLength() < 600) {
