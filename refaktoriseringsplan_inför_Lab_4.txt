@@ -1,0 +1,24 @@
+
+
+
+Refaktoriseringsplan
+
+1. Kontrolllera testerna
+
+2. Bryt ut Timelistener, samt minska beroendet mellan Controller och View
+
+3. Flytta moveIt från DrawPanel
+
+4. Hantera de hårdkodade bilderna från CarView, använd HashMap istället.
+
+5. refaktorisera initComponent som ligger i CarController
+
+6. refaktorisera om main från carcontroller till Main.
+
+7. Flytt ut all logik från Controller
+
+8. MVC - paket?
+
+(Parallellt: Gör metoder mer läsbara och tydligare. FrontEnd: tiltSpinner ska ligga bättre till)
+
+extra: anpassa för Hampus dator.
