@@ -16,7 +16,7 @@ public class CarController {
     private final int delay = 50;
     // The timer is started with a listener (see below) that executes the statements
     // each step between delays.
-    private Timer timer = new Timer(delay, new TimerListener());
+    private Timer timer;
 
     // The frame that represents this instance View of the MVC pattern
     CarView frame;
@@ -25,6 +25,9 @@ public class CarController {
     //Verkstad
     Verkstad<Volvo240> volvo240Verkstad = new Verkstad<>(6, 300, 300);
 
+    public CarController(){
+        timer = new Timer(delay, new TimerListener(this));
+    }
 
     //methods:
 
@@ -43,23 +46,17 @@ public class CarController {
         cc.timer.start();
     }
 
-    /* Each step the TimerListener moves all the cars in the list and tells the
-    * view to update its images. Change this method to your needs.
-    * */
-    private class TimerListener implements ActionListener {
-        public void actionPerformed(ActionEvent e) {
-            for (Car car : cars) {
-                car.move();
-                frame.drawPanel.moveit(car);
-                if (car instanceof Volvo240 && car.getPos().distance(volvo240Verkstad.pos)<10
-                        && !car.getIsAttached()){
-                    volvo240Verkstad.load((Volvo240) car);
-                    car.stopEngine();
-                    System.out.println(volvo240Verkstad.nrOfCars());
-                }
-                // repaint() calls the paintComponent method of the panel
-                frame.drawPanel.repaint();
+    public void moveCars() {
+        for (Car car : cars) {
+            car.move();
+            if (car instanceof Volvo240 && car.getPos().distance(volvo240Verkstad.pos)<10
+                    && !car.getIsAttached()){
+                volvo240Verkstad.load((Volvo240) car);
+                car.stopEngine();
+                System.out.println(volvo240Verkstad.nrOfCars());
             }
+            // repaint() calls the paintComponent method of the panel
+            frame.drawPanel.repaint();
         }
     }
 

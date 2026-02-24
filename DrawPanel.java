@@ -2,6 +2,9 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 import javax.imageio.ImageIO;
 import javax.swing.*;
 
@@ -9,42 +12,24 @@ import javax.swing.*;
 
 public class DrawPanel extends JPanel{
 
+    HashMap<Position, BufferedImage> map = new HashMap<>();
     // Just a single image, TODO: Generalize
     BufferedImage volvoImage;
     // To keep track of a single car's position
-    Point volvoPoint = new Point(0, 300);
+    //Point volvoPoint = new Point(0, 300);
 
     // Lägg till Saab och Scania
     BufferedImage saabImage;
-    Point saabPoint = new Point(0,100);
+    //Point saabPoint = new Point(0,100);
 
     BufferedImage scaniaImage;
-    Point scaniaPoint = new Point(0,400);
+    //Point scaniaPoint = new Point(0,400);
 
     BufferedImage volvoWorkshopImage;
-    Point volvoWorkshopPoint = new Point(300,300);
-
-    // TODO: Make this general for all cars
-    void moveit(Car car){
-        int x = Math.toIntExact(Math.round(car.getPos().getX()));
-        int y = Math.toIntExact(Math.round(car.getPos().getY()));
-
-        if (car instanceof Volvo240) {
-            volvoPoint.x = x;
-            volvoPoint.y = y;
-        }
-        else if (car instanceof Saab95) {
-            saabPoint.x = x;
-            saabPoint.y = y;
-        }
-        else if (car instanceof Scania<?>) {
-            scaniaPoint.x = x;
-            scaniaPoint.y = y;
-        }
-    }
+    //Point volvoWorkshopPoint = new Point(300,300);
 
     // Initializes the panel and reads the images
-    public DrawPanel(int x, int y) {
+    public DrawPanel(int x, int y, ArrayList<Car> cars, Verkstad<Volvo240> volvo240Verkstad) {
         this.setDoubleBuffered(true);
         this.setPreferredSize(new Dimension(x, y));
         this.setBackground(Color.green);
@@ -64,6 +49,18 @@ public class DrawPanel extends JPanel{
         {
             ex.printStackTrace();
         }
+        for (Car car : cars) {
+            if (car instanceof Volvo240) {
+                map.put(car.getPos(), volvoImage);
+            }
+            else if (car instanceof Saab95) {
+                map.put(car.getPos(), saabImage);
+            }
+            else if (car instanceof Scania<?>) {
+                map.put(car.getPos(), scaniaImage);
+            }
+        }
+        map.put(volvo240Verkstad.pos, volvoWorkshopImage);
     }
 
     // This method is called each time the panel updates/refreshes/repaints itself
@@ -71,9 +68,10 @@ public class DrawPanel extends JPanel{
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
-        g.drawImage(volvoImage, volvoPoint.x, volvoPoint.y, null); // see javadoc for more info on the parameters
-        g.drawImage(volvoWorkshopImage, volvoWorkshopPoint.x, volvoWorkshopPoint.y, null);
-        g.drawImage(saabImage, saabPoint.x, saabPoint.y, null);
-        g.drawImage(scaniaImage, scaniaPoint.x, scaniaPoint.y, null);
+        for (Map.Entry<Position, BufferedImage> entry : map.entrySet()) {
+            int x = Math.toIntExact(Math.round(entry.getKey().getX()));
+            int y = Math.toIntExact(Math.round(entry.getKey().getY()));
+            g.drawImage(entry.getValue(), x, y, null);
+        }
     }
 }
