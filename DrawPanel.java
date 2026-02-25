@@ -50,17 +50,22 @@ public class DrawPanel extends JPanel{
             ex.printStackTrace();
         }
         for (Car car : cars) {
-            if (car instanceof Volvo240) {
-                map.put(car.getPos(), volvoImage);
-            }
-            else if (car instanceof Saab95) {
-                map.put(car.getPos(), saabImage);
-            }
-            else if (car instanceof Scania<?>) {
-                map.put(car.getPos(), scaniaImage);
-            }
+            addCarToMap(car);
         }
         map.put(volvo240Verkstad.pos, volvoWorkshopImage);
+    }
+
+    // För att kunna lägga till nya bilar i hashMapen
+    public void addCarToMap(Car car) {
+        if (car instanceof Volvo240) {
+            map.putIfAbsent(car.getPos(), volvoImage);
+        }
+        else if (car instanceof Saab95) {
+            map.putIfAbsent(car.getPos(), saabImage);
+        }
+        else if (car instanceof Scania<?>) {
+            map.putIfAbsent(car.getPos(), scaniaImage);
+        }
     }
 
     // This method is called each time the panel updates/refreshes/repaints itself
