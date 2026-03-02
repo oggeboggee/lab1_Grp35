@@ -15,6 +15,12 @@ public class Verkstad<T extends Car>{
     }
 
     // ---------------------------------- METODER ----------------------------------
+
+
+    public Position getPos() {
+        return pos;
+    }
+
     public void load(T car) {
         if (cars.size()<capacity && !car.getIsAttached()) {
             cars.add(car);

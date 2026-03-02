@@ -46,7 +46,7 @@ public class CarView extends JFrame implements signalObserver{
     // Constructor
     public CarView(String framename, CarController cc) {
         this.carC = cc;
-        drawPanel = new DrawPanel(X, Y - 240, cc.time.cars, cc.time.volvo240Verkstad);
+        drawPanel = new DrawPanel(X, Y - 240);
         this.setTitle(framename);
         this.setPreferredSize(new Dimension(X + 181, Y));
         this.setLayout(new FlowLayout(FlowLayout.LEFT, 0, 0));

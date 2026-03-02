@@ -29,7 +29,7 @@ public class DrawPanel extends JPanel{
     //Point volvoWorkshopPoint = new Point(300,300);
 
     // Initializes the panel and reads the images
-    public DrawPanel(int x, int y, ArrayList<Car> cars, Verkstad<Volvo240> volvo240Verkstad) {
+    public DrawPanel(int x, int y) {
         this.setDoubleBuffered(true);
         this.setPreferredSize(new Dimension(x, y));
         this.setBackground(Color.green);
@@ -49,10 +49,6 @@ public class DrawPanel extends JPanel{
         {
             ex.printStackTrace();
         }
-        for (Car car : cars) {
-            addCarToMap(car);
-        }
-        map.put(volvo240Verkstad.pos, volvoWorkshopImage);
     }
 
     // För att kunna lägga till nya bilar i hashMapen
@@ -66,6 +62,16 @@ public class DrawPanel extends JPanel{
         else if (car instanceof Scania<?>) {
             map.putIfAbsent(car.getPos(), scaniaImage);
         }
+    }
+
+    public void addCarToMap(ArrayList<Car> cars) {
+        for (Car car : cars) {
+            addCarToMap(car);
+        }
+    }
+
+    public void addVerkstad(Verkstad<?> v) {
+        map.putIfAbsent(v.getPos(), volvoWorkshopImage);
     }
 
     // This method is called each time the panel updates/refreshes/repaints itself
