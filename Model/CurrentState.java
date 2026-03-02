@@ -6,11 +6,13 @@ import java.util.ArrayList;
  * view to update its images. Change this method to your needs.
  * */
 public class CurrentState {
+    final int maxCars = 13;
     // Current State
     private ArrayList<Car> cars = new ArrayList<>();
     private Verkstad<Volvo240> volvo240Verkstad = new Verkstad<>(6, 300, 300);
     // Observers
     private ArrayList<signalObserver> obs = new ArrayList<>();
+    private CarFactory factory = new CarFactory();
 
     // Clone???
     public ArrayList<Car> getCars() {
@@ -39,9 +41,30 @@ public class CurrentState {
         }
     }
 
+    public void addCar() {
+        if (cars.size()<maxCars) {
+            cars.add(factory.createCar());
+            notifyObservers();
+        }
+    }
+
+    public void removeCar() {
+        if (cars.size()>0) {
+            Car car = cars.getLast();
+            notifyObservers(car.getPos());
+            cars.removeLast();
+        }
+    }
+
     public void notifyObservers() {
         for (signalObserver observer : obs) {
             observer.notifyOb();
         }
     }
+    public void notifyObservers(Position pos) {
+        for (signalObserver observer : obs) {
+            observer.notifyOb(pos);
+        }
+    }
+
 }

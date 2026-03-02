@@ -80,6 +80,14 @@ public class CarController implements ActionListener {
         }
     }
 
+    void addCar() {
+        currentState.addCar();
+    }
+
+    void removeCar() {
+        currentState.removeCar();
+    }
+
     @Override
     public void actionPerformed(ActionEvent e) {
         currentState.update();

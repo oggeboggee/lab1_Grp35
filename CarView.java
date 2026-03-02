@@ -1,3 +1,4 @@
+import Model.Position;
 import Model.signalObserver;
 
 import javax.swing.*;
@@ -42,6 +43,9 @@ public class CarView extends JFrame implements signalObserver {
     JButton liftBedButton = new JButton("Model.Scania Lift Bed");
     JButton lowerBedButton = new JButton("Lower Lift Bed");
 
+    JButton addCarButton = new JButton("Add Car");
+    JButton removeCarButton = new JButton("Remove Car");
+
     JButton startButton = new JButton("Start all cars");
     JButton stopButton = new JButton("Stop all cars");
 
@@ -84,6 +88,8 @@ public class CarView extends JFrame implements signalObserver {
         controlPanel.add(brakeButton, 3);
         controlPanel.add(turboOffButton, 4);
         controlPanel.add(lowerBedButton, 5);
+        controlPanel.add(addCarButton, 6);
+        controlPanel.add(removeCarButton, 7);
         controlPanel.setPreferredSize(new Dimension((X / 2) + 4, 200));
         this.add(controlPanel);
         controlPanel.setBackground(Color.CYAN);
@@ -155,6 +161,20 @@ public class CarView extends JFrame implements signalObserver {
             }
         });
 
+        addCarButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                carC.addCar();
+            }
+        });
+
+        removeCarButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                carC.removeCar();
+            }
+        });
+
         // Make the frame pack all it's components by respecting the sizes if possible.
         this.pack();
         // Get the computer screen resolution
@@ -169,6 +189,13 @@ public class CarView extends JFrame implements signalObserver {
 
     @Override
     public void notifyOb() {
+        this.drawPanel.addCarToMap(carC.currentState.getCars());
+        this.drawPanel.repaint();
+    }
+
+    @Override
+    public void notifyOb(Position pos) {
+        this.drawPanel.removeCarFromMap(pos);
         this.drawPanel.repaint();
     }
 }

@@ -184,7 +184,7 @@ public abstract class Car implements Movable {
 
     private void vänd(){
         stopEngine();
-        turnRight();
+        //turnRight();
         turnRight();
         startEngine();
     }

@@ -8,7 +8,7 @@ public class CarFactory {
     public Car createCar() {
 
         Random r = new Random();
-        int r1 = r.nextInt(2);
+        int r1 = r.nextInt(3);
 
         double x1 = r.nextDouble(700);
         double y1 = r.nextDouble(500);

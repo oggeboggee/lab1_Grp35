@@ -71,6 +71,10 @@ public class DrawPanel extends JPanel{
         }
     }
 
+    public void removeCarFromMap(Position pos) {
+        map.remove(pos);
+    }
+
     public void addVerkstad(Verkstad<?> v) {
         map.putIfAbsent(v.getPos(), volvoWorkshopImage);
     }
