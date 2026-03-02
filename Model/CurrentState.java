@@ -1,5 +1,5 @@
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+package Model;
+
 import java.util.ArrayList;
 
 /* Each step the TimerListener moves all the cars in the list and tells the

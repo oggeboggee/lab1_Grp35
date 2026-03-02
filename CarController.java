@@ -4,6 +4,11 @@
 * modifying the model state and the updating the view.
  */
 
+import Model.Car;
+import Model.CurrentState;
+import Model.Saab95;
+import Model.Scania;
+
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 

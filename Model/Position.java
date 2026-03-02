@@ -1,3 +1,5 @@
+package Model;
+
 public class Position implements Cloneable {
     private double x;
     private double y;

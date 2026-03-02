@@ -1,7 +1,9 @@
+package Model;
+
 import java.awt.*;
 import java.util.ArrayList;
 
-public class Scania<Cargo> extends Car implements Loadable<Cargo>{
+public class Scania<Cargo> extends Car implements Loadable<Cargo> {
 
     // ---------------------------------- INSTANSVARIABLER ----------------------------------
     private ArrayList<Cargo> cargo;
@@ -10,7 +12,7 @@ public class Scania<Cargo> extends Car implements Loadable<Cargo>{
     // ---------------------------------- KONSTRUKTOR ----------------------------------
 
     public Scania(double xCoord, double yCoord) {
-        super(2,100, Color.blue, "Scania", 1800, 260, xCoord, yCoord);
+        super(2,100, Color.blue, "Model.Scania", 1800, 260, xCoord, yCoord);
         cargo = new ArrayList<>();
         flakTilt = 0;
     }

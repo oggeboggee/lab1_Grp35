@@ -1,3 +1,5 @@
+package Model;
+
 import java.awt.*;
 
 public class CarTransport extends Car implements Loadable<Car> {
@@ -8,7 +10,7 @@ public class CarTransport extends Car implements Loadable<Car> {
 
     // ---------------------------------- KONSTRUKTOR ----------------------------------
     public CarTransport(double xCoord, double yCoord) {
-        super(2, 100, Color.RED, "CarTransport", 1800, 220, xCoord, yCoord);
+        super(2, 100, Color.RED, "Model.CarTransport", 1800, 220, xCoord, yCoord);
         nrLoadedCars = 0;
         load = new Car[6];
         trailerIsUp = true;
@@ -59,7 +61,7 @@ public class CarTransport extends Car implements Loadable<Car> {
     } // load
 
     /**
-     * unload the car with the highest index in this load, unload it just behind the CarTransport
+     * unload the car with the highest index in this load, unload it just behind the Model.CarTransport
      *
      * @return the unloaded car if trailer not is empty and trailer is down before the method is called
      */

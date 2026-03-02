@@ -1,3 +1,5 @@
+package Model;
+
 import java.awt.*;
 import java.util.ArrayList;
 
@@ -211,4 +213,4 @@ public abstract class Car implements Movable {
             dir = direction;
         }
     }
-} // class Car
+} // class Model.Car

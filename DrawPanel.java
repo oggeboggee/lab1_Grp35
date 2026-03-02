@@ -1,6 +1,7 @@
+import Model.*;
+
 import java.awt.*;
 import java.awt.image.BufferedImage;
-import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -18,7 +19,7 @@ public class DrawPanel extends JPanel{
     // To keep track of a single car's position
     //Point volvoPoint = new Point(0, 300);
 
-    // Lägg till Saab och Scania
+    // Lägg till Saab och Model.Scania
     BufferedImage saabImage;
     //Point saabPoint = new Point(0,100);
 
@@ -37,7 +38,7 @@ public class DrawPanel extends JPanel{
         try {
             // You can remove the "pics" part if running outside of IntelliJ and
             // everything is in the same main folder.
-            // volvoImage = ImageIO.read(new File("Volvo240.jpg"));
+            // volvoImage = ImageIO.read(new File("Model.Volvo240.jpg"));
 
             // Rememember to rightclick src New -> Package -> name: pics -> MOVE *.jpg to pics.
             // if you are starting in IntelliJ.

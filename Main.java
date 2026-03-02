@@ -1,3 +1,5 @@
+import Model.*;
+
 import javax.swing.*;
 
 public class Main {
