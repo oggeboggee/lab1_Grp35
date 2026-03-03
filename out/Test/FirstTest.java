@@ -1,8 +1,8 @@
+import Model.*;
 import junit.framework.Assert;
 import org.junit.Test;
 
 import java.awt.*;
-import java.util.Objects;
 
 public class FirstTest {
 
@@ -13,17 +13,20 @@ public class FirstTest {
     @Test
     public void TestGetCar(){
         /*
-        Assert.assertEquals(Car.getCar(0), saab);
-        Assert.assertEquals(Car.getCar(1), volvo);
-        Assert.assertEquals(Car.getCar(10), car7);
+        Assert.assertEquals(Model.Car.getCar(0), saab);
+        Assert.assertEquals(Model.Car.getCar(1), volvo);
+        Assert.assertEquals(Model.Car.getCar(10), car7);
         */
         Car car = Car.getCar(0);
     }
+
 
     @Test
     public void testMain(){
         Main.main();
     }
+
+
 
     @Test
     public void TestGetNrDoorsSaab() {
@@ -334,7 +337,7 @@ public class FirstTest {
     }
 
     @Test
-    //testar om rampen kan vara nere medans CarTransport kör
+    //testar om rampen kan vara nere medans Model.CarTransport kör
     public void testMoveCarTransport() {
         Position posCT = new Position(carTransport.getPos().getX(), carTransport.getPos().getY());
         //kontrollerar så att positionen är [0,0]
